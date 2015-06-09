@@ -28,7 +28,7 @@ class EditCourseViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.destinationViewController.isKindOfClass(EditViewController)) {
-            var destination:EditViewController = segue.destinationViewController as EditViewController
+            var destination:EditViewController = segue.destinationViewController as! EditViewController
             destination.editCourse = course;
             destination.index = index
         }

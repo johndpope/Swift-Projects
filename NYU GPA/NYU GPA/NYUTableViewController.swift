@@ -48,7 +48,7 @@ class NYUTableViewController: UITableViewController {
                 courses.removeLast()
             }
             for (var i = 0; i < data.count; ++i) {
-                var course = propertyListToCourse(data[i] as NSMutableDictionary)
+                var course = propertyListToCourse(data[i] as! NSMutableDictionary)
                 courses.append(course)
                 //println("Course: \(course.name) Grade: \(course.grade) NumCredits: \(course.numCredts)")
                 switch(course.year) {
@@ -108,10 +108,10 @@ class NYUTableViewController: UITableViewController {
     
     func propertyListToCourse(coursePropertyList:NSMutableDictionary) -> Course {
         // Creates an object from a property list (NSMutableDictionary)
-        let name = coursePropertyList[COURSE_NAME] as String
-        let grade = coursePropertyList[COURSE_GRADE] as Double
-        let numCredits = coursePropertyList[NUM_CREDITS] as Double
-        let year = coursePropertyList[COURSE_YEAR] as Int
+        let name = coursePropertyList[COURSE_NAME] as! String
+        let grade = coursePropertyList[COURSE_GRADE] as! Double
+        let numCredits = coursePropertyList[NUM_CREDITS] as! Double
+        let year = coursePropertyList[COURSE_YEAR] as! Int
         var course = Course(name: name, grade: grade, numCredits: numCredits, year: year)
         return course
     }
@@ -176,7 +176,7 @@ class NYUTableViewController: UITableViewController {
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
         //cell.textLabel?.text = "\(courses[indexPath.row].name)"
@@ -214,7 +214,7 @@ class NYUTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //Pass data after segueing
         if (segue.destinationViewController.isKindOfClass(EditCourseViewController)) {
-            var destination:EditCourseViewController = segue.destinationViewController as EditCourseViewController
+            var destination:EditCourseViewController = segue.destinationViewController as! EditCourseViewController
             var indexPath : NSIndexPath = self.tableView.indexPathForSelectedRow()!
             var index:Int
 

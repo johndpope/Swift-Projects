@@ -42,7 +42,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             todoItems = [];
             for (var i = 0; i < data.count; ++i) {
-                todoItems.append(data[i] as NSString);
+                todoItems.append(data[i] as! String);
             }
         }
         tableViewOutlet.reloadData();

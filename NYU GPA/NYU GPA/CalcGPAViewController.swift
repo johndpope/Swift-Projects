@@ -33,7 +33,7 @@ class CalcGPAViewController: UIViewController {
         var totalGrade = studentTotal / creditsTaken
         
         // Formatting a decimal
-        calculatedGPALabel.text = NSString(format: "%.3f", totalGrade)
+        calculatedGPALabel.text = NSString(format: "%.3f", totalGrade) as String
     }
 
     /*

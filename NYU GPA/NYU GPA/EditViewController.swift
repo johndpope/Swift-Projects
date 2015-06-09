@@ -105,7 +105,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.destinationViewController.isKindOfClass(EditCourseViewController)) {
-            var destination:EditCourseViewController = segue.destinationViewController as EditCourseViewController
+            var destination:EditCourseViewController = segue.destinationViewController as! EditCourseViewController
             destination.course = editCourse;
         }
     }
