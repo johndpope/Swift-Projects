@@ -109,8 +109,9 @@ class ViewController: UIViewController {
 
                 var destination:DataViewController = self.storyboard?.instantiateViewControllerWithIdentifier("data") as! DataViewController
                 destination.obj = obj
-                self.presentViewController(destination, animated: true, completion: nil)
                 self.dismissViewControllerAnimated(false, completion: nil)
+                self.presentViewController(destination, animated: true, completion: nil)
+
                 
                 
             } else if data.length == 0 && error == nil {
