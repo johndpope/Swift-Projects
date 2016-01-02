@@ -18,20 +18,20 @@ class DataViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        println("-----------------------------------------------------")
-        println(obj.isp)
-        println(obj.longitude)
-        println(obj.latitude)
-        println(obj.area_code)
-        println(obj.country)
-        println(obj.country_code3)
-        println(obj.dma_code)
-        println(obj.asn)
-        println(obj.continent_code)
-        println(obj.ip)
-        println(obj.country_code)
-        println("Success!!!")
-        println("Now, Let's convert this back to a JSON Object!!!")
+        print("-----------------------------------------------------")
+        print(obj.isp)
+        print(obj.longitude)
+        print(obj.latitude)
+        print(obj.area_code)
+        print(obj.country)
+        print(obj.country_code3)
+        print(obj.dma_code)
+        print(obj.asn)
+        print(obj.continent_code)
+        print(obj.ip)
+        print(obj.country_code)
+        print("Success!!!")
+        print("Now, Let's convert this back to a JSON Object!!!")
         
         var dict = [
             "isp": obj.isp,
@@ -48,8 +48,8 @@ class DataViewController: UIViewController {
         
         ]
         var jsonObj = JSON(dict)
-        println(jsonObj)
-        println("Well done Mohan, well done.")
+        print(jsonObj)
+        print("Well done Mohan, well done.")
 
         
         

@@ -160,6 +160,8 @@
 		D7DC4C7A1A507E9100CD3D43 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Mohan Dhar";
 				TargetAttributes = {
@@ -409,6 +411,7 @@
 				D7DC4CA31A507E9100CD3D43 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D7DC4CA41A507E9100CD3D43 /* Build configuration list for PBXNativeTarget "Where Am ITests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +420,7 @@
 				D7DC4CA61A507E9100CD3D43 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

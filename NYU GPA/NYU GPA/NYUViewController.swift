@@ -57,9 +57,9 @@ class NYUViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     }
     
     func saveData() -> Void {
-        var data = NSMutableArray();
+        let data = NSMutableArray();
         for (var i = 0; i < courses.count; ++i) {
-            var propertyList = courseAsPropertyList(courses[i])
+            let propertyList = courseAsPropertyList(courses[i])
             data.addObject(propertyList)
         }
         
@@ -81,8 +81,8 @@ class NYUViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        println("Touches began test")
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("Touches began test")
         courseNameOutlet.resignFirstResponder()
     }
 
@@ -119,7 +119,7 @@ class NYUViewController: UIViewController, UIPickerViewDataSource, UIPickerViewD
     // Convert Course Class to Property List so we can append
     // to an Array then persist that array
     func courseAsPropertyList(newCourse: Course) -> NSMutableDictionary {
-        var propertyList = NSMutableDictionary();
+        let propertyList = NSMutableDictionary();
         propertyList.setValue(newCourse.name, forKey: COURSE_NAME)
         propertyList.setValue(newCourse.grade, forKey: COURSE_GRADE)
         propertyList.setValue(newCourse.numCredts, forKey: NUM_CREDITS)

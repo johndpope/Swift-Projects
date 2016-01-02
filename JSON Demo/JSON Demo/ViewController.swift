@@ -19,13 +19,25 @@ class ViewController: UIViewController {
         
         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue(), completionHandler: {
             
-            response, data, error in
+            (response, data, error) in
             if error != nil {
-                println(error)
+                print(error)
             } else {
-                let jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
-                println(jsonResult)
-                println(jsonResult["country_code"]);
+                var jsonResult: AnyObject?
+                do {
+                    jsonResult = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)
+                } catch _ {
+                    jsonResult = nil
+                }
+                
+                if (jsonResult == nil) {
+                    print("No Json Object found!")
+                }
+                //print(jsonResult)
+                let obj = jsonResult as! NSDictionary
+                
+                let attr = obj["ip"] as! String
+                print(attr)
             }
         
         })

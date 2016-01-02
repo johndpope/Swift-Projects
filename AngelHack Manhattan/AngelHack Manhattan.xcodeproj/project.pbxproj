@@ -1,0 +1,575 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D77CF48D1B516DF0002730BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77CF48C1B516DF0002730BE /* AppDelegate.swift */; };
+		D77CF48F1B516DF0002730BE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77CF48E1B516DF0002730BE /* ProfileViewController.swift */; };
+		D77CF4921B516DF0002730BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D77CF4901B516DF0002730BE /* Main.storyboard */; };
+		D77CF4941B516DF0002730BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D77CF4931B516DF0002730BE /* Assets.xcassets */; };
+		D77CF4971B516DF0002730BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D77CF4951B516DF0002730BE /* LaunchScreen.storyboard */; };
+		D77CF4A21B516DF0002730BE /* AngelHack_ManhattanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77CF4A11B516DF0002730BE /* AngelHack_ManhattanTests.swift */; };
+		D77CF4AD1B516DF0002730BE /* AngelHack_ManhattanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77CF4AC1B516DF0002730BE /* AngelHack_ManhattanUITests.swift */; };
+		D77CF4BB1B51751C002730BE /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77CF4BA1B51751C002730BE /* Person.swift */; };
+		D77CF4BD1B5183AF002730BE /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77CF4BC1B5183AF002730BE /* EditViewController.swift */; };
+		D77CF4BF1B518AB5002730BE /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77CF4BE1B518AB5002730BE /* QRCodeViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D77CF49E1B516DF0002730BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D77CF4811B516DF0002730BE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D77CF4881B516DF0002730BE;
+			remoteInfo = "AngelHack Manhattan";
+		};
+		D77CF4A91B516DF0002730BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D77CF4811B516DF0002730BE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D77CF4881B516DF0002730BE;
+			remoteInfo = "AngelHack Manhattan";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D77CF4891B516DF0002730BE /* AngelHack Manhattan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AngelHack Manhattan.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D77CF48C1B516DF0002730BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D77CF48E1B516DF0002730BE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		D77CF4911B516DF0002730BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D77CF4931B516DF0002730BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D77CF4961B516DF0002730BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D77CF4981B516DF0002730BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D77CF49D1B516DF0002730BE /* AngelHack ManhattanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AngelHack ManhattanTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D77CF4A11B516DF0002730BE /* AngelHack_ManhattanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngelHack_ManhattanTests.swift; sourceTree = "<group>"; };
+		D77CF4A31B516DF0002730BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D77CF4A81B516DF0002730BE /* AngelHack ManhattanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AngelHack ManhattanUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D77CF4AC1B516DF0002730BE /* AngelHack_ManhattanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngelHack_ManhattanUITests.swift; sourceTree = "<group>"; };
+		D77CF4AE1B516DF0002730BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D77CF4BA1B51751C002730BE /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		D77CF4BC1B5183AF002730BE /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		D77CF4BE1B518AB5002730BE /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D77CF4861B516DF0002730BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D77CF49A1B516DF0002730BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D77CF4A51B516DF0002730BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D77CF4801B516DF0002730BE = {
+			isa = PBXGroup;
+			children = (
+				D77CF48B1B516DF0002730BE /* AngelHack Manhattan */,
+				D77CF4A01B516DF0002730BE /* AngelHack ManhattanTests */,
+				D77CF4AB1B516DF0002730BE /* AngelHack ManhattanUITests */,
+				D77CF48A1B516DF0002730BE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D77CF48A1B516DF0002730BE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D77CF4891B516DF0002730BE /* AngelHack Manhattan.app */,
+				D77CF49D1B516DF0002730BE /* AngelHack ManhattanTests.xctest */,
+				D77CF4A81B516DF0002730BE /* AngelHack ManhattanUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D77CF48B1B516DF0002730BE /* AngelHack Manhattan */ = {
+			isa = PBXGroup;
+			children = (
+				D77CF48C1B516DF0002730BE /* AppDelegate.swift */,
+				D77CF48E1B516DF0002730BE /* ProfileViewController.swift */,
+				D77CF4BA1B51751C002730BE /* Person.swift */,
+				D77CF4BC1B5183AF002730BE /* EditViewController.swift */,
+				D77CF4901B516DF0002730BE /* Main.storyboard */,
+				D77CF4BE1B518AB5002730BE /* QRCodeViewController.swift */,
+				D77CF4931B516DF0002730BE /* Assets.xcassets */,
+				D77CF4951B516DF0002730BE /* LaunchScreen.storyboard */,
+				D77CF4981B516DF0002730BE /* Info.plist */,
+			);
+			path = "AngelHack Manhattan";
+			sourceTree = "<group>";
+		};
+		D77CF4A01B516DF0002730BE /* AngelHack ManhattanTests */ = {
+			isa = PBXGroup;
+			children = (
+				D77CF4A11B516DF0002730BE /* AngelHack_ManhattanTests.swift */,
+				D77CF4A31B516DF0002730BE /* Info.plist */,
+			);
+			path = "AngelHack ManhattanTests";
+			sourceTree = "<group>";
+		};
+		D77CF4AB1B516DF0002730BE /* AngelHack ManhattanUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D77CF4AC1B516DF0002730BE /* AngelHack_ManhattanUITests.swift */,
+				D77CF4AE1B516DF0002730BE /* Info.plist */,
+			);
+			path = "AngelHack ManhattanUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D77CF4881B516DF0002730BE /* AngelHack Manhattan */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D77CF4B11B516DF0002730BE /* Build configuration list for PBXNativeTarget "AngelHack Manhattan" */;
+			buildPhases = (
+				E90F6E567F197FA2C3494C80 /* Check Pods Manifest.lock */,
+				D77CF4851B516DF0002730BE /* Sources */,
+				D77CF4861B516DF0002730BE /* Frameworks */,
+				D77CF4871B516DF0002730BE /* Resources */,
+				2828C4457B57739B31AC54AE /* Embed Pods Frameworks */,
+				DF2715A6EDAC61F3D34B723A /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AngelHack Manhattan";
+			productName = "AngelHack Manhattan";
+			productReference = D77CF4891B516DF0002730BE /* AngelHack Manhattan.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D77CF49C1B516DF0002730BE /* AngelHack ManhattanTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D77CF4B41B516DF0002730BE /* Build configuration list for PBXNativeTarget "AngelHack ManhattanTests" */;
+			buildPhases = (
+				D77CF4991B516DF0002730BE /* Sources */,
+				D77CF49A1B516DF0002730BE /* Frameworks */,
+				D77CF49B1B516DF0002730BE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D77CF49F1B516DF0002730BE /* PBXTargetDependency */,
+			);
+			name = "AngelHack ManhattanTests";
+			productName = "AngelHack ManhattanTests";
+			productReference = D77CF49D1B516DF0002730BE /* AngelHack ManhattanTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D77CF4A71B516DF0002730BE /* AngelHack ManhattanUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D77CF4B71B516DF0002730BE /* Build configuration list for PBXNativeTarget "AngelHack ManhattanUITests" */;
+			buildPhases = (
+				D77CF4A41B516DF0002730BE /* Sources */,
+				D77CF4A51B516DF0002730BE /* Frameworks */,
+				D77CF4A61B516DF0002730BE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D77CF4AA1B516DF0002730BE /* PBXTargetDependency */,
+			);
+			name = "AngelHack ManhattanUITests";
+			productName = "AngelHack ManhattanUITests";
+			productReference = D77CF4A81B516DF0002730BE /* AngelHack ManhattanUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D77CF4811B516DF0002730BE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Mohan Dhar";
+				TargetAttributes = {
+					D77CF4881B516DF0002730BE = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					D77CF49C1B516DF0002730BE = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = D77CF4881B516DF0002730BE;
+					};
+					D77CF4A71B516DF0002730BE = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = D77CF4881B516DF0002730BE;
+					};
+				};
+			};
+			buildConfigurationList = D77CF4841B516DF0002730BE /* Build configuration list for PBXProject "AngelHack Manhattan" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D77CF4801B516DF0002730BE;
+			productRefGroup = D77CF48A1B516DF0002730BE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D77CF4881B516DF0002730BE /* AngelHack Manhattan */,
+				D77CF49C1B516DF0002730BE /* AngelHack ManhattanTests */,
+				D77CF4A71B516DF0002730BE /* AngelHack ManhattanUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D77CF4871B516DF0002730BE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D77CF4971B516DF0002730BE /* LaunchScreen.storyboard in Resources */,
+				D77CF4941B516DF0002730BE /* Assets.xcassets in Resources */,
+				D77CF4921B516DF0002730BE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D77CF49B1B516DF0002730BE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D77CF4A61B516DF0002730BE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2828C4457B57739B31AC54AE /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF2715A6EDAC61F3D34B723A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E90F6E567F197FA2C3494C80 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D77CF4851B516DF0002730BE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D77CF4BD1B5183AF002730BE /* EditViewController.swift in Sources */,
+				D77CF4BB1B51751C002730BE /* Person.swift in Sources */,
+				D77CF48F1B516DF0002730BE /* ProfileViewController.swift in Sources */,
+				D77CF48D1B516DF0002730BE /* AppDelegate.swift in Sources */,
+				D77CF4BF1B518AB5002730BE /* QRCodeViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D77CF4991B516DF0002730BE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D77CF4A21B516DF0002730BE /* AngelHack_ManhattanTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D77CF4A41B516DF0002730BE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D77CF4AD1B516DF0002730BE /* AngelHack_ManhattanUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D77CF49F1B516DF0002730BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D77CF4881B516DF0002730BE /* AngelHack Manhattan */;
+			targetProxy = D77CF49E1B516DF0002730BE /* PBXContainerItemProxy */;
+		};
+		D77CF4AA1B516DF0002730BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D77CF4881B516DF0002730BE /* AngelHack Manhattan */;
+			targetProxy = D77CF4A91B516DF0002730BE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D77CF4901B516DF0002730BE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D77CF4911B516DF0002730BE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D77CF4951B516DF0002730BE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D77CF4961B516DF0002730BE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D77CF4AF1B516DF0002730BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D77CF4B01B516DF0002730BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D77CF4B21B516DF0002730BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "AngelHack Manhattan/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "self.com.Mohan.AngelHack-Manhattan";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D77CF4B31B516DF0002730BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "AngelHack Manhattan/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "self.com.Mohan.AngelHack-Manhattan";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D77CF4B51B516DF0002730BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "AngelHack ManhattanTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "self.com.Mohan.AngelHack-ManhattanTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AngelHack Manhattan.app/AngelHack Manhattan";
+			};
+			name = Debug;
+		};
+		D77CF4B61B516DF0002730BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "AngelHack ManhattanTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "self.com.Mohan.AngelHack-ManhattanTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AngelHack Manhattan.app/AngelHack Manhattan";
+			};
+			name = Release;
+		};
+		D77CF4B81B516DF0002730BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "AngelHack ManhattanUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "self.com.Mohan.AngelHack-ManhattanUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "AngelHack Manhattan";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		D77CF4B91B516DF0002730BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "AngelHack ManhattanUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "self.com.Mohan.AngelHack-ManhattanUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "AngelHack Manhattan";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D77CF4841B516DF0002730BE /* Build configuration list for PBXProject "AngelHack Manhattan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D77CF4AF1B516DF0002730BE /* Debug */,
+				D77CF4B01B516DF0002730BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D77CF4B11B516DF0002730BE /* Build configuration list for PBXNativeTarget "AngelHack Manhattan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D77CF4B21B516DF0002730BE /* Debug */,
+				D77CF4B31B516DF0002730BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D77CF4B41B516DF0002730BE /* Build configuration list for PBXNativeTarget "AngelHack ManhattanTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D77CF4B51B516DF0002730BE /* Debug */,
+				D77CF4B61B516DF0002730BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D77CF4B71B516DF0002730BE /* Build configuration list for PBXNativeTarget "AngelHack ManhattanUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D77CF4B81B516DF0002730BE /* Debug */,
+				D77CF4B91B516DF0002730BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D77CF4811B516DF0002730BE /* Project object */;
+}

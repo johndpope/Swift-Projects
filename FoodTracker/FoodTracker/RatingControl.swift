@@ -30,7 +30,7 @@ class RatingControl: UIView {
     
     
     // MARK: Initialization
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         for _ in 0..<stars {

@@ -28,9 +28,9 @@ class CalcGPAViewController: UIViewController {
             studentTotal += courses[i].grade * courses[i].numCredts
             creditsTaken += courses[i].numCredts
         }
-        println(studentTotal)
-        println(creditsTaken)
-        var totalGrade = studentTotal / creditsTaken
+        print(studentTotal)
+        print(creditsTaken)
+        let totalGrade = studentTotal / creditsTaken
         
         // Formatting a decimal
         calculatedGPALabel.text = NSString(format: "%.3f", totalGrade) as String

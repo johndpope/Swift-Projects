@@ -60,9 +60,9 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     //NSUserDefaults
     func saveData() -> Void {
-        var data = NSMutableArray();
+        let data = NSMutableArray();
         for (var i = 0; i < courses.count; ++i) {
-            var propertyList = courseAsPropertyList(courses[i])
+            let propertyList = courseAsPropertyList(courses[i])
             data.addObject(propertyList)
         }
         
@@ -71,7 +71,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     }
     
     func courseAsPropertyList(newCourse: Course) -> NSMutableDictionary {
-        var propertyList = NSMutableDictionary();
+        let propertyList = NSMutableDictionary();
         propertyList.setValue(newCourse.name, forKey: COURSE_NAME)
         propertyList.setValue(newCourse.grade, forKey: COURSE_GRADE)
         propertyList.setValue(newCourse.numCredts, forKey: NUM_CREDITS)
@@ -105,7 +105,7 @@ class EditViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.destinationViewController.isKindOfClass(EditCourseViewController)) {
-            var destination:EditCourseViewController = segue.destinationViewController as! EditCourseViewController
+            let destination:EditCourseViewController = segue.destinationViewController as! EditCourseViewController
             destination.course = editCourse;
         }
     }

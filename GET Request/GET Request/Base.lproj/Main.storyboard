@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GET_Request" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jy0-KY-E45">
+                                <rect key="frame" x="248" y="285" width="104" height="30"/>
+                                <state key="normal" title="Download MP3"/>
+                                <connections>
+                                    <action selector="downloadMp3ButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="998-T7-hhF"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dWv-gW-grJ">
+                                <rect key="frame" x="20" y="247" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7U-TY-wzv">
+                                <rect key="frame" x="285" y="390" width="30" height="30"/>
+                                <state key="normal" title="Play"/>
+                                <connections>
+                                    <action selector="playMp3:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HO0-hV-W6k"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Jy0-KY-E45" firstAttribute="top" secondItem="dWv-gW-grJ" secondAttribute="bottom" constant="8" id="5e3-fC-Iz5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dWv-gW-grJ" secondAttribute="trailing" id="KXT-n0-XQF"/>
+                            <constraint firstItem="Q7U-TY-wzv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TSG-ev-2mL"/>
+                            <constraint firstItem="Q7U-TY-wzv" firstAttribute="top" secondItem="Jy0-KY-E45" secondAttribute="bottom" constant="75" id="epp-KI-4Tr"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="dWv-gW-grJ" secondAttribute="leading" id="gHv-uK-tn5"/>
+                            <constraint firstItem="Jy0-KY-E45" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gbV-Nn-Ef2"/>
+                            <constraint firstItem="Jy0-KY-E45" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="icK-lm-ack"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="urlField" destination="dWv-gW-grJ" id="1dc-5t-FIi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="305" y="289"/>
+        </scene>
+        <!--Youtube View Controller-->
+        <scene sceneID="Okl-Ky-Cm7">
+            <objects>
+                <viewController id="7bd-og-Ciq" customClass="YoutubeViewController" customModule="GET_Request" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MSn-gA-sxk"/>
+                        <viewControllerLayoutGuide type="bottom" id="koq-MB-gOM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="01d-bw-KSc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="RO7-PD-ecq">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RO7-PD-ecq" firstAttribute="top" secondItem="MSn-gA-sxk" secondAttribute="bottom" id="bb9-Gd-Mu9"/>
+                            <constraint firstItem="RO7-PD-ecq" firstAttribute="leading" secondItem="01d-bw-KSc" secondAttribute="leadingMargin" constant="-20" id="nl7-JT-rA7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="RO7-PD-ecq" secondAttribute="trailing" constant="-20" id="sbE-da-KLg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="RO7-PD-ecq" id="tDf-Mg-ee8"/>
+                        <outlet property="searchDisplayController" destination="8Rz-dy-8bF" id="vhB-2Z-msH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cZi-kF-Ihe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="6du-rj-6u0">
+                    <connections>
+                        <outlet property="delegate" destination="7bd-og-Ciq" id="4JZ-89-wOM"/>
+                        <outlet property="searchContentsController" destination="7bd-og-Ciq" id="kLW-P4-iVP"/>
+                        <outlet property="searchResultsDataSource" destination="7bd-og-Ciq" id="vV9-3U-Sw6"/>
+                        <outlet property="searchResultsDelegate" destination="7bd-og-Ciq" id="zI2-mP-9at"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="8Rz-dy-8bF">
+                    <connections>
+                        <outlet property="delegate" destination="7bd-og-Ciq" id="0FI-kG-TwL"/>
+                        <outlet property="searchContentsController" destination="7bd-og-Ciq" id="8bg-mU-k7C"/>
+                        <outlet property="searchResultsDataSource" destination="7bd-og-Ciq" id="nan-cK-g5B"/>
+                        <outlet property="searchResultsDelegate" destination="7bd-og-Ciq" id="Rcl-8C-t0F"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="1006" y="72"/>
+        </scene>
+    </scenes>
+</document>

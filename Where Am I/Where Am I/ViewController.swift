@@ -40,8 +40,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func reload(sender: UIButton) {
         viewDidLoad();
     }
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println(error);
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error);
         errorLabel.hidden = false;
         reloadButton.hidden = false;
         UIView.animateWithDuration(1.5, animations: {
@@ -50,9 +50,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         })
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         var location:CLLocation = locations[0] as CLLocation;
-        println(location);
+        print(location);
 
         latitudeLabel.text = "\(location.coordinate.latitude)";
         longitudeLabel.text = "\(location.coordinate.longitude)";
@@ -62,7 +62,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         CLGeocoder().reverseGeocodeLocation(location, completionHandler:{(placemarks, error) in
             if (error != nil) {
-                println("Error: \(error)"); }
+                print("Error: \(error)"); }
             else {
                 let p = CLPlacemark(placemark: placemarks?[0] as CLPlacemark);
                 

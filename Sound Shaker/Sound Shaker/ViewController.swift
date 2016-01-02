@@ -15,10 +15,10 @@ class ViewController: UIViewController {
     
     var player = AVAudioPlayer();
     
-    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
         if (event.subtype == UIEventSubtype.MotionShake) {
             
-            player = AVAudioPlayer(contentsOfURL: sound, error: nil);
+            player = try? AVAudioPlayer(contentsOfURL: sound);
             player.play();
             
         }

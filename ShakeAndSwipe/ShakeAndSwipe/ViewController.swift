@@ -14,28 +14,28 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        var swipeRight = UISwipeGestureRecognizer(target: self, action: "swiped:")
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: "swiped:")
         swipeRight.direction = UISwipeGestureRecognizerDirection.Right;
         self.view.addGestureRecognizer(swipeRight);
         
-        var swipeUp = UISwipeGestureRecognizer(target: self, action: "swiped:")
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: "swiped:")
         swipeUp.direction = UISwipeGestureRecognizerDirection.Up;
         self.view.addGestureRecognizer(swipeUp);
         
-        var swipeDown = UISwipeGestureRecognizer(target: self, action: "swiped:")
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: "swiped:")
         swipeDown.direction = UISwipeGestureRecognizerDirection.Down;
         self.view.addGestureRecognizer(swipeDown);
         
-        var swipeLeft = UISwipeGestureRecognizer(target: self, action: "swiped:")
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: "swiped:")
         swipeLeft.direction = UISwipeGestureRecognizerDirection.Left;
         self.view.addGestureRecognizer(swipeLeft);
         
     }
     
-    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent) {
-        if (event.subtype == UIEventSubtype.MotionShake) {
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        if (event!.subtype == UIEventSubtype.MotionShake) {
             
-            println("User Shook Their Device");
+            print("User Shook Their Device");
             
         }
     }
@@ -48,16 +48,16 @@ class ViewController: UIViewController {
             switch (swipeGesture.direction) {
                 
                 case UISwipeGestureRecognizerDirection.Right:
-                    println("User swiped Right");
+                    print("User swiped Right");
                 
                 case UISwipeGestureRecognizerDirection.Up:
-                    println("User swiped Up");
+                    print("User swiped Up");
                 
                 case UISwipeGestureRecognizerDirection.Down:
-                    println("User swiped Down")
+                    print("User swiped Down")
                 
                 case UISwipeGestureRecognizerDirection.Left:
-                    println("User Swiped Left");
+                    print("User Swiped Left");
                 
                 default:
                     break;

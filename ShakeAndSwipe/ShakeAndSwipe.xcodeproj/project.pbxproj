@@ -156,6 +156,8 @@
 		D77B6E0C1B1E54B400E0EB28 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Mohan Dhar";
 				TargetAttributes = {
@@ -405,6 +407,7 @@
 				D77B6E351B1E54B500E0EB28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D77B6E361B1E54B500E0EB28 /* Build configuration list for PBXNativeTarget "ShakeAndSwipeTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +416,7 @@
 				D77B6E381B1E54B500E0EB28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

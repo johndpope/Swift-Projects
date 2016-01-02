@@ -43,12 +43,12 @@ class NYUTableViewController: UITableViewController {
         //NSUserDefaults.standardUserDefaults().removeObjectForKey(COURSES)
         //NSUserDefaults.standardUserDefaults().synchronize()
         
-        if var data:AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(COURSES) {
+        if let data:AnyObject = NSUserDefaults.standardUserDefaults().objectForKey(COURSES) {
             if courses.count == 1 {
                 courses.removeLast()
             }
             for (var i = 0; i < data.count; ++i) {
-                var course = propertyListToCourse(data[i] as! NSMutableDictionary)
+                let course = propertyListToCourse(data[i] as! NSMutableDictionary)
                 courses.append(course)
                 //println("Course: \(course.name) Grade: \(course.grade) NumCredits: \(course.numCredts)")
                 switch(course.year) {
@@ -68,7 +68,7 @@ class NYUTableViewController: UITableViewController {
                     break;
                 }
             }
-            println("Freshman: \(freshmanYear.count) Sophomore: \(sophomoreYear.count) Junior: \(juniorYear.count) Senior: \(seniorYear.count)")
+            print("Freshman: \(freshmanYear.count) Sophomore: \(sophomoreYear.count) Junior: \(juniorYear.count) Senior: \(seniorYear.count)")
         }
 
         // Uncomment the following line to preserve selection between presentations
@@ -86,9 +86,9 @@ class NYUTableViewController: UITableViewController {
     
     func saveData() -> Void {
         // Save the data in NSUserDefaults using an array
-        var data = NSMutableArray();
+        let data = NSMutableArray();
         for (var i = 0; i < courses.count; ++i) {
-            var propertyList = courseAsPropertyList(courses[i])
+            let propertyList = courseAsPropertyList(courses[i])
             data.addObject(propertyList)
         }
         
@@ -98,7 +98,7 @@ class NYUTableViewController: UITableViewController {
     
     func courseAsPropertyList(newCourse: Course) -> NSMutableDictionary {
         // Property list is an dictionary with a key for each attribute of a custom object
-        var propertyList = NSMutableDictionary();
+        let propertyList = NSMutableDictionary();
         propertyList.setValue(newCourse.name, forKey: COURSE_NAME)
         propertyList.setValue(newCourse.grade, forKey: COURSE_GRADE)
         propertyList.setValue(newCourse.numCredts, forKey: NUM_CREDITS)
@@ -112,7 +112,7 @@ class NYUTableViewController: UITableViewController {
         let grade = coursePropertyList[COURSE_GRADE] as! Double
         let numCredits = coursePropertyList[NUM_CREDITS] as! Double
         let year = coursePropertyList[COURSE_YEAR] as! Int
-        var course = Course(name: name, grade: grade, numCredits: numCredits, year: year)
+        let course = Course(name: name, grade: grade, numCredits: numCredits, year: year)
         return course
     }
 
@@ -176,7 +176,7 @@ class NYUTableViewController: UITableViewController {
 
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
 
         // Configure the cell...
         //cell.textLabel?.text = "\(courses[indexPath.row].name)"
@@ -214,8 +214,8 @@ class NYUTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //Pass data after segueing
         if (segue.destinationViewController.isKindOfClass(EditCourseViewController)) {
-            var destination:EditCourseViewController = segue.destinationViewController as! EditCourseViewController
-            var indexPath : NSIndexPath = self.tableView.indexPathForSelectedRow()!
+            let destination:EditCourseViewController = segue.destinationViewController as! EditCourseViewController
+            let indexPath : NSIndexPath = self.tableView.indexPathForSelectedRow!
             var index:Int
 
             
@@ -276,7 +276,7 @@ class NYUTableViewController: UITableViewController {
             }
             for (var i = 0; i < courses.count; ++i) {
                 if (remove.name == courses[i].name) {
-                    println("\(courses[i].name) removed from courses")
+                    print("\(courses[i].name) removed from courses")
                     courses.removeAtIndex(i)
                 }
             }

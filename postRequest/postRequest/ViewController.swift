@@ -92,19 +92,19 @@ class ViewController: UIViewController {
         
         let queue = NSOperationQueue()
         
-        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {(response: NSURLResponse!,
-            data: NSData!, error: NSError!) in
+        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue, completionHandler: {(response: NSURLResponse?,
+            data: NSData?, error: NSError?) in
             
          /* Now we may have access to the data, but check if an error comes back first or not */
-            if data.length > 0 && error == nil {
-                let json = JSON(data: data)
-                println(json)
-                println("JSON OBJECT IS WORKING")
-                println("----------------------")
+            if data!.length > 0 && error == nil {
+                let json = JSON(data: data!)
+                print(json)
+                print("JSON OBJECT IS WORKING")
+                print("----------------------")
                 let obj = GEOIP(jsonObj: json)
-                println(obj)
-                println("OBJECT FROM JSON IS WORKING")
-                println("---------------------------")
+                print(obj)
+                print("OBJECT FROM JSON IS WORKING")
+                print("---------------------------")
                 
 
                 var destination:DataViewController = self.storyboard?.instantiateViewControllerWithIdentifier("data") as! DataViewController
@@ -114,10 +114,10 @@ class ViewController: UIViewController {
 
                 
                 
-            } else if data.length == 0 && error == nil {
-                println("Nothing was downloaded")
+            } else if data!.length == 0 && error == nil {
+                print("Nothing was downloaded")
             } else if error != nil {
-                println("Error happened = \(error)")
+                print("Error happened = \(error)")
             }
             
         })
