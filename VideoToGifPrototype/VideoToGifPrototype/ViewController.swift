@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var count = 0;
+    var timer: NSTimer?;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +29,30 @@ class ViewController: UIViewController {
         UIGraphicsEndImageContext();
         UIImageWriteToSavedPhotosAlbum(screenshot, nil, nil, nil);
         
+        ++count;
+        print(count);
+        
+    }
+    
+    @IBAction func take18ButtonPressed(sender: UIButton) {
+        take18Screenshots();
     }
     
     @IBAction func screenshotButtonPressed(sender: UIButton) {
         takeScreenshot();
     }
+    
+    func take18Screenshots() {
+        count = 0;
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.03333333, target: self, selector: "takeScreenshot", userInfo: nil, repeats: true);
+        timer?.fire();
+        
+    }
+    
+    @IBAction func stopButtonPressed(sender: UIButton) {
+        timer?.invalidate();
+    }
+    
+    
 }
 

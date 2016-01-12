@@ -25,11 +25,33 @@
                                     <action selector="screenshotButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XRt-q3-m1I"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDx-OL-xOe">
+                                <rect key="frame" x="274" y="323" width="53" height="30"/>
+                                <state key="normal" title="Take 18">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="take18ButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="68j-M9-WRg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ZR-sL-9Zo">
+                                <rect key="frame" x="335" y="323" width="33" height="30"/>
+                                <state key="normal" title="Stop">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aLM-mn-dfU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="gxH-EB-MMo" secondAttribute="centerX" id="3bD-cO-TH7"/>
                             <constraint firstAttribute="centerY" secondItem="gxH-EB-MMo" secondAttribute="centerY" id="4w3-oC-7XA"/>
+                            <constraint firstItem="6ZR-sL-9Zo" firstAttribute="leading" secondItem="qDx-OL-xOe" secondAttribute="trailing" constant="8" id="gIY-d1-xr4"/>
+                            <constraint firstItem="6ZR-sL-9Zo" firstAttribute="top" secondItem="gxH-EB-MMo" secondAttribute="bottom" constant="8" id="mF9-Uv-mjy"/>
+                            <constraint firstAttribute="centerX" secondItem="qDx-OL-xOe" secondAttribute="centerX" constant="-0.5" id="sJf-am-WSI"/>
+                            <constraint firstItem="qDx-OL-xOe" firstAttribute="top" secondItem="gxH-EB-MMo" secondAttribute="bottom" constant="8" id="tqH-Sr-hJk"/>
                         </constraints>
                     </view>
                 </viewController>

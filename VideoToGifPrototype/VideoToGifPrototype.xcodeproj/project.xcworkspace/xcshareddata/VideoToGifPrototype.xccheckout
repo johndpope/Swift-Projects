@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>FE2B1E82-62C1-42E0-8A37-EF6E5C2B8DB2</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>VideoToGifPrototype</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>84F936BFE61CC6DADEC68FE16C0ED3AC279BBCB5</key>
 		<string>https://github.com/MohanDhar/Swift-Projects.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>VideoToGifPrototype/VideoToGifPrototype.xcodeproj/project.xcworkspace</string>
+	<string>VideoToGifPrototype/VideoToGifPrototype.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>84F936BFE61CC6DADEC68FE16C0ED3AC279BBCB5</key>
