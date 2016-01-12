@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -34,7 +35,7 @@
                                     <action selector="take18ButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="68j-M9-WRg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ZR-sL-9Zo">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ZR-sL-9Zo">
                                 <rect key="frame" x="335" y="323" width="33" height="30"/>
                                 <state key="normal" title="Stop">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -43,14 +44,29 @@
                                     <action selector="stopButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aLM-mn-dfU"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PTg-ch-IIc">
+                                <rect key="frame" x="243" y="198" width="51" height="31"/>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aXL-GT-3lp">
+                                <rect key="frame" x="308" y="198" width="51" height="31"/>
+                            </switch>
+                            <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="vrm-bB-5pP">
+                                <rect key="frame" x="241" y="237" width="118" height="31"/>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="gxH-EB-MMo" secondAttribute="centerX" id="3bD-cO-TH7"/>
                             <constraint firstAttribute="centerY" secondItem="gxH-EB-MMo" secondAttribute="centerY" id="4w3-oC-7XA"/>
+                            <constraint firstItem="gxH-EB-MMo" firstAttribute="leading" secondItem="PTg-ch-IIc" secondAttribute="trailing" constant="-15" id="5Pe-KN-1iH"/>
+                            <constraint firstItem="vrm-bB-5pP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="C94-Wl-dlQ"/>
+                            <constraint firstItem="vrm-bB-5pP" firstAttribute="top" secondItem="aXL-GT-3lp" secondAttribute="bottom" constant="8" id="LIW-q0-QFU"/>
+                            <constraint firstItem="vrm-bB-5pP" firstAttribute="top" secondItem="PTg-ch-IIc" secondAttribute="bottom" constant="8" id="cvI-zp-UHV"/>
+                            <constraint firstItem="aXL-GT-3lp" firstAttribute="leading" secondItem="gxH-EB-MMo" secondAttribute="trailing" constant="-15" id="dRq-q2-X45"/>
                             <constraint firstItem="6ZR-sL-9Zo" firstAttribute="leading" secondItem="qDx-OL-xOe" secondAttribute="trailing" constant="8" id="gIY-d1-xr4"/>
                             <constraint firstItem="6ZR-sL-9Zo" firstAttribute="top" secondItem="gxH-EB-MMo" secondAttribute="bottom" constant="8" id="mF9-Uv-mjy"/>
                             <constraint firstAttribute="centerX" secondItem="qDx-OL-xOe" secondAttribute="centerX" constant="-0.5" id="sJf-am-WSI"/>
+                            <constraint firstItem="gxH-EB-MMo" firstAttribute="top" secondItem="vrm-bB-5pP" secondAttribute="bottom" constant="18" id="tTU-Os-gpI"/>
                             <constraint firstItem="qDx-OL-xOe" firstAttribute="top" secondItem="gxH-EB-MMo" secondAttribute="bottom" constant="8" id="tqH-Sr-hJk"/>
                         </constraints>
                     </view>
