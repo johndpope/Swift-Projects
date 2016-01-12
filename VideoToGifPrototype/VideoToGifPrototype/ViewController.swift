@@ -20,6 +20,17 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    func takeScreenshot() {
+        UIGraphicsBeginImageContext(self.view.bounds.size);
+        self.view.layer.renderInContext(UIGraphicsGetCurrentContext());
+        var screenshot = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        UIImageWriteToSavedPhotosAlbum(screenshot, nil, nil, nil);
+        
+    }
+    
+    @IBAction func screenshotButtonPressed(sender: UIButton) {
+        takeScreenshot();
+    }
 }
 
