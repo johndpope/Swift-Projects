@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         UIImageWriteToSavedPhotosAlbum(screenshot, nil, nil, nil);
         
         ++count;
-        print(count);
+        print("\(count)\n");
         
     }
     
@@ -43,6 +43,7 @@ class ViewController: UIViewController {
     }
     
     func take18Screenshots() {
+        timer?.invalidate();
         count = 0;
         timer = NSTimer.scheduledTimerWithTimeInterval(0.03333333, target: self, selector: "takeScreenshot", userInfo: nil, repeats: true);
         timer?.fire();
