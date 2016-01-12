@@ -65,8 +65,8 @@ class ViewController: UIViewController {
     
     func saveVidToLibrary() {
         let fileName = "temp.mp4";
-        let width = 640;
-        let height = 480;
+        let width = 480;
+        let height = 640;
         
         // Choose directory to save on
         let directoryOut = "/tmp/";
@@ -75,15 +75,13 @@ class ViewController: UIViewController {
         let path = NSHomeDirectory().stringByAppendingString(outFile);
         print("path: \(path)");
         let vidTempURL = NSURL.fileURLWithPath("\(NSTemporaryDirectory())\(fileName))");
-        print("vidTempURL: \(vidTempURL)");
+        print("vidTempURL: \(vidTempURL)\n");
         
         // AVAsset writer does not overwrite files for us, so remove destination file if it already exists
-        let fileManager = NSFileManager.defaultManager();
-        do {
-            try fileManager.removeItemAtPath(vidTempURL.path!);
-        } catch {}
+        // Delete original first, then save
+        _ = try? NSFileManager().removeItemAtPath(path);
         
-        //let videoWriter = try? AVAssetWriter(URL: vidTempURL, fileType: AVFileTypeMPEG4);
+        
         let videoWriter = try? AVAssetWriter(URL: NSURL(fileURLWithPath: path), fileType: AVFileTypeMPEG4);
         
         let videoSettings = [ AVVideoCodecKey : AVVideoCodecH264,
@@ -91,7 +89,7 @@ class ViewController: UIViewController {
         
         let writerInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: videoSettings);
         
-        var adapter = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: writerInput, sourcePixelBufferAttributes: nil);
+        let adapter = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: writerInput, sourcePixelBufferAttributes: nil);
         
         // Assert that the videoWriter can indeed take in the video input
         assert((videoWriter?.canAddInput(writerInput))!);
@@ -134,6 +132,7 @@ class ViewController: UIViewController {
                             print("Video writing succeeded");
                             var vidTempURL = NSURL.fileURLWithPath("\(path)")
                             print("vidTempURL: \(vidTempURL)");
+                            
                             self.saveToCameraRoll(vidTempURL);
                             
                         } else {
