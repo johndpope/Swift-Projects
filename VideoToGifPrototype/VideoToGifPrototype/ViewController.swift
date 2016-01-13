@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var count = 0;
     var timer: NSTimer?;
     var array = [UIImage]();
+    var backgroundTask = UIBackgroundTaskInvalid;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,10 @@ class ViewController: UIViewController {
 
     func takeScreenshot() {
         UIGraphicsBeginImageContext(self.view.bounds.size);
+
         self.view.layer.renderInContext(UIGraphicsGetCurrentContext()!);
+        print("\(UIGraphicsGetCurrentContext()!)\n");
+        
         let screenshot = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         array.append(screenshot);
@@ -53,7 +57,23 @@ class ViewController: UIViewController {
         count = 0;
         timer = NSTimer.scheduledTimerWithTimeInterval(0.03333333, target: self, selector: "takeScreenshot", userInfo: nil, repeats: true);
         timer?.fire();
+        registerBackgroundTask();
         
+    }
+    
+    func registerBackgroundTask() {
+        backgroundTask = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({
+            [unowned self] in
+            self.endBackgroundTask()
+        })
+        assert(backgroundTask != UIBackgroundTaskInvalid);
+    }
+    
+    func endBackgroundTask() {
+        print("Background task ended\n");
+        UIApplication.sharedApplication().endBackgroundTask(backgroundTask);
+        backgroundTask = UIBackgroundTaskInvalid;
+
     }
     
     @IBAction func stopButtonPressed(sender: UIButton) {
@@ -61,7 +81,6 @@ class ViewController: UIViewController {
         saveVidToLibrary();
         array = [ ];
     }
-    
     
     func saveVidToLibrary() {
         let fileName = "temp.mp4";
@@ -148,6 +167,7 @@ class ViewController: UIViewController {
             }
         }
     }
+    
     
     func saveToCameraRoll(url: NSURL) {
         let library = ALAssetsLibrary();
