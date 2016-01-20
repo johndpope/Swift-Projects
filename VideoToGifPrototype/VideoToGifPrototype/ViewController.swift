@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     @IBAction func take18ButtonPressed(sender: UIButton) {
         take18Screenshots();
     }
-    
+     
     @IBAction func screenshotButtonPressed(sender: UIButton) {
         takeScreenshot();
     }
