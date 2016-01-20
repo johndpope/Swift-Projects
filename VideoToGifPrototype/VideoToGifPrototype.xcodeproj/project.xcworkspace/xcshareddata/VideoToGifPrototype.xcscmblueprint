@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "84F936BFE61CC6DADEC68FE16C0ED3AC279BBCB5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "1C3E4DDBC364A53C6FDEA47FBE90E30B5C049504" : 0,
+    "84F936BFE61CC6DADEC68FE16C0ED3AC279BBCB5" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "FE2B1E82-62C1-42E0-8A37-EF6E5C2B8DB2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "1C3E4DDBC364A53C6FDEA47FBE90E30B5C049504" : "Swift-Projects\/VideoToGifPrototype\/RecordMyScreen\/",
+    "84F936BFE61CC6DADEC68FE16C0ED3AC279BBCB5" : "Swift-Projects"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "VideoToGifPrototype",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "VideoToGifPrototype\/VideoToGifPrototype.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/coolstar\/RecordMyScreen.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1C3E4DDBC364A53C6FDEA47FBE90E30B5C049504"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/MohanDhar\/Swift-Projects.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "84F936BFE61CC6DADEC68FE16C0ED3AC279BBCB5"
+    }
+  ]
+}
