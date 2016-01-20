@@ -14,6 +14,7 @@
 		D7244DED1C448789000B97A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7244DEC1C448789000B97A9 /* Images.xcassets */; };
 		D7244DF01C448789000B97A9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7244DEE1C448789000B97A9 /* LaunchScreen.xib */; };
 		D7244DFC1C448789000B97A9 /* VideoToGifPrototypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7244DFB1C448789000B97A9 /* VideoToGifPrototypeTests.swift */; };
+		D7914ACD1C4F68BE0062EE7A /* PrivateHeaders in Resources */ = {isa = PBXBuildFile; fileRef = D7914ACC1C4F68BE0062EE7A /* PrivateHeaders */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		D7244DF51C448789000B97A9 /* VideoToGifPrototypeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VideoToGifPrototypeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7244DFA1C448789000B97A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7244DFB1C448789000B97A9 /* VideoToGifPrototypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoToGifPrototypeTests.swift; sourceTree = "<group>"; };
+		D7914ACC1C4F68BE0062EE7A /* PrivateHeaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PrivateHeaders; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		D7244DD41C448789000B97A9 = {
 			isa = PBXGroup;
 			children = (
+				D7914ACC1C4F68BE0062EE7A /* PrivateHeaders */,
 				D7244DDF1C448789000B97A9 /* VideoToGifPrototype */,
 				D7244DF81C448789000B97A9 /* VideoToGifPrototypeTests */,
 				D7244DDE1C448789000B97A9 /* Products */,
@@ -163,7 +166,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Mohan Dhar";
 				TargetAttributes = {
 					D7244DDC1C448789000B97A9 = {
@@ -205,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7244DEB1C448789000B97A9 /* Main.storyboard in Resources */,
+				D7914ACD1C4F68BE0062EE7A /* PrivateHeaders in Resources */,
 				D7244DF01C448789000B97A9 /* LaunchScreen.xib in Resources */,
 				D7244DED1C448789000B97A9 /* Images.xcassets in Resources */,
 			);
@@ -288,7 +292,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -304,7 +310,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -334,6 +340,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -344,7 +351,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "bridging-header.h";
@@ -357,11 +364,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = VideoToGifPrototype/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MohanDhar.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -369,9 +379,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = VideoToGifPrototype/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MohanDhar.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
@@ -391,6 +403,7 @@
 				);
 				INFOPLIST_FILE = VideoToGifPrototypeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MohanDhar.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VideoToGifPrototype.app/VideoToGifPrototype";
@@ -407,6 +420,7 @@
 				);
 				INFOPLIST_FILE = VideoToGifPrototypeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MohanDhar.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VideoToGifPrototype.app/VideoToGifPrototype";

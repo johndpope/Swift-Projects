@@ -10,7 +10,6 @@ import UIKit
 import AVFoundation
 import AssetsLibrary
 
-
 class ViewController: UIViewController {
     var count = 0;
     var timer: NSTimer?;
@@ -47,7 +46,7 @@ class ViewController: UIViewController {
     @IBAction func take18ButtonPressed(sender: UIButton) {
         take18Screenshots();
     }
-    
+     
     @IBAction func screenshotButtonPressed(sender: UIButton) {
         takeScreenshot();
     }
@@ -105,7 +104,7 @@ class ViewController: UIViewController {
         let videoWriter = try? AVAssetWriter(URL: NSURL(fileURLWithPath: path), fileType: AVFileTypeMPEG4);
         
         let videoSettings = [ AVVideoCodecKey : AVVideoCodecH264,
-        AVVideoWidthKey : width, AVVideoHeightKey : height] as? [String : AnyObject];
+                            AVVideoWidthKey : width, AVVideoHeightKey : height] as? [String : AnyObject];
         
         let writerInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings: videoSettings);
         
