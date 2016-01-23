@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var usernameTextField: UITextField!
     
@@ -32,6 +32,11 @@ class LoginViewController: UIViewController {
                 messagesViewController.username = usernameTextField.text ?? "";
             }
         }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder();
+        return true;
     }
     
     /*

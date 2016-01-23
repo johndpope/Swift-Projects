@@ -31,26 +31,41 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
         var user: String;
         var message: String;
         var timestamp: String;
+        var id: Int;
         
-        init(username: String, msg: String, time: String) {
+        init(username: String, msg: String, time: String, identifier: Int) {
             self.user = username;
             self.message = msg;
             self.timestamp = time;
+            self.id = identifier;
         }
     }
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var messageTextField: UITextField!
+    @IBOutlet var sendButton: UIButton!
+
+    var scrollView: UIScrollView!
     
     var messages = [ChatItem]()
     var username: String = "";
+    var lastSeen = 0;
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set up scroll view programmatically
+        scrollView = UIScrollView(frame: view.bounds);
+        scrollView.contentSize = view.bounds.size;
+        scrollView.addSubview(tableView);
+        scrollView.addSubview(messageTextField);
+        scrollView.addSubview(sendButton);
+        view.addSubview(scrollView)
 
         // Do any additional setup after loading the view.
         print("\(username) has entered")
         getMessages();
+        registerForKeyboardNotifications();
 
     }
 
@@ -66,7 +81,7 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
     func send() {
         makePostRequest();
         clearChatBox();
-        messageTextField.becomeFirstResponder();
+        //messageTextField.becomeFirstResponder();
     }
     
     func printMessages() {
@@ -76,13 +91,12 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func makePostRequest() {
-        let url = "http://localhost:8000/store/get_name_and_message/"
+        let url = "http://localhost:8000/store/get_name_and_message/";
         
         let parameters = [
             "user": username,
-            "message": messageTextField.text ?? ""
-        ]
-        
+            "message": messageTextField.text ?? "",
+        ];
         
         Alamofire.request(.POST, url, parameters: parameters, encoding: .JSON)
             .responseJSON { response in
@@ -92,10 +106,13 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func getMessages() {
-        messages = [ ]
         let url = "http://localhost:8000/store/show_all_messages/"
+        let parameters = [
+            "id" :  self.lastSeen
+        ]
         
-        Alamofire.request(.GET, url).validate().responseJSON { response in
+        
+        Alamofire.request(.GET, url, parameters: parameters).validate().responseJSON { response in
             switch response.result {
             case .Success:
                 if let value = response.result.value {
@@ -125,9 +142,12 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
                 msg = message;
             }
             
+            let id: Int = json[i]["pk"].intValue;
+            self.lastSeen = id;
+            
             print("\(username) said \(msg) at \(time)");
             
-            let item = ChatItem(username: username, msg: msg, time: time);
+            let item = ChatItem(username: username, msg: msg, time: time, identifier: id);
             messages.append(item);
         }
         loadMessages();
@@ -135,6 +155,12 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
     
     func loadMessages() {
         tableView.reloadData();
+        if messages.count != 0 {
+            scrollToLastMessage();
+        }
+    }
+    
+    func scrollToLastMessage() {
         if messages.count != 0 {
             tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: messages.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         }
@@ -169,6 +195,46 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
         textField.resignFirstResponder();
         send();
         return true;
+    }
+    
+
+    func registerForKeyboardNotifications() {
+        let notificationCenter = NSNotificationCenter.defaultCenter();
+        notificationCenter.addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardDidHideNotification, object: nil)
+
+    }
+    
+    func keyboardWasShown(notification: NSNotification) {
+        // Get the keyboard information
+        print("Keyboard did show")
+        let info: NSDictionary = notification.userInfo!;
+        let keyboardSize = info.objectForKey(UIKeyboardFrameBeginUserInfoKey)!.CGRectValue.size;
+        
+        // Offset everything by keyboard height
+        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+        tableView.contentInset = contentInsets;
+        tableView.scrollIndicatorInsets = contentInsets;
+        
+        
+        // If active text field is hidden by keyboard, scroll it so it's visible
+        var rect = self.view.frame;
+        rect.size.height -= keyboardSize.height;
+        if (!CGRectContainsPoint(rect, messageTextField.frame.origin)) {
+            self.scrollView.scrollRectToVisible(messageTextField.frame, animated: true);
+            scrollToLastMessage();
+//            messageTextField.frame = CGRectMake(messageTextField.frame.origin.x, messageTextField.frame.origin.y - keyboardSize.height, messageTextField.frame.width, messageTextField.frame.height)
+            
+            
+        }
+    }
+
+    
+    func keyboardWillBeHidden(notification: NSNotification) {
+        print("Keyboard will hide")
+        let contentInsets = UIEdgeInsetsZero;
+        tableView.contentInset = contentInsets;
+        tableView.scrollIndicatorInsets = contentInsets;
     }
     
     
