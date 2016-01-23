@@ -26,10 +26,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "Messages" {
-            let messagesViewController = segue.destinationViewController as! MessagesViewController
+        
+        if segue.identifier == "Messages2" {
+            let chatViewController = segue.destinationViewController as! ChatViewController
             if let _ = sender as? UIButton {
-                messagesViewController.username = usernameTextField.text ?? "";
+                chatViewController.username = usernameTextField.text ?? "";
             }
         }
     }

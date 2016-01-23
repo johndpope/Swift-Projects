@@ -1,8 +1,8 @@
 //
-//  MessagesViewController.swift
+//  ChatViewController.swift
 //  ChatClient
 //
-//  Created by Mohan Dhar on 1/21/16.
+//  Created by Mohan Dhar on 1/23/16.
 //  Copyright © 2016 Mohan Dhar. All rights reserved.
 //
 
@@ -25,8 +25,8 @@ class MessageTextField: UITextField {
 }
 
 
-class MessagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
-    
+class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, UITextFieldDelegate {
+
     struct ChatItem {
         var user: String;
         var message: String;
@@ -42,31 +42,29 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var messageTextField: UITextField!
     @IBOutlet var sendButton: UIButton!
-
-    var scrollView: UIScrollView!
     
     var messages = [ChatItem]()
     var username: String = "";
     var lastSeen = 0;
+    var keyboardShowing = false;
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set up scroll view programmatically
-        scrollView = UIScrollView(frame: view.bounds);
-        scrollView.contentSize = view.bounds.size;
-        scrollView.addSubview(tableView);
-        scrollView.addSubview(messageTextField);
-        scrollView.addSubview(sendButton);
-        view.addSubview(scrollView)
+        // Set scroll view size
+        scrollView.contentSize = self.view.bounds.size;
 
+        // Set tableview separators to clear color
+        self.tableView.separatorColor = UIColor.clearColor();
+        
         // Do any additional setup after loading the view.
         print("\(username) has entered")
         getMessages();
         registerForKeyboardNotifications();
-
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,20 +72,40 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func sendMessage(sender: UIButton) {
-        send()
+
+    // TableView Delegate + Datasource
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1;
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count;
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("messagesIdentifier", forIndexPath: indexPath) as! ChatBubbleTableViewCell
+        
+        cell.messageLabel?.text = "\(messages[indexPath.row].user) : \(messages[indexPath.row].message)";
+        if (self.username == messages[indexPath.row].user) {
+
+        } else {
+
+        }
+        
+        return cell;
+    }
+    
+    
+    @IBAction func sendButtonPressed(sender: UIButton) {
+        send();
+    }
+    
+    // Handle REQUESTS
     func send() {
         makePostRequest();
         clearChatBox();
-        //messageTextField.becomeFirstResponder();
-    }
-    
-    func printMessages() {
-        for (var i = 0; i < messages.count; ++i) {
-            print("User : \(messages[i].user) said \(messages[i].message) at \(messages[i].timestamp)\n");
-        }
+        messageTextField.becomeFirstResponder();
+        
     }
     
     func makePostRequest() {
@@ -134,7 +152,7 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
             if let timestamp = json[i]["fields"]["created_on"].string {
                 time = timestamp
             }
-
+            
             if let user = json[i]["fields"]["user"].string {
                 username = user;
             }
@@ -145,7 +163,7 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
             let id: Int = json[i]["pk"].intValue;
             self.lastSeen = id;
             
-            print("\(username) said \(msg) at \(time)");
+            //print("\(username) said \(msg) at \(time)");
             
             let item = ChatItem(username: username, msg: msg, time: time, identifier: id);
             messages.append(item);
@@ -153,11 +171,11 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
         loadMessages();
     }
     
+    
+    // UTILITY Methods
     func loadMessages() {
         tableView.reloadData();
-        if messages.count != 0 {
-            scrollToLastMessage();
-        }
+        scrollToLastMessage();
     }
     
     func scrollToLastMessage() {
@@ -167,85 +185,56 @@ class MessagesViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func clearChatBox() {
+        // There is a bug where the chatbox moves to it's original position after setting the text
         messageTextField.text = "";
-    }
-
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1;
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return messages.count;
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("messagesIdentifier", forIndexPath: indexPath)
         
-        cell.textLabel?.text = "\(messages[indexPath.row].user) : \(messages[indexPath.row].message)";
-        if (self.username == messages[indexPath.row].user) {
-            cell.textLabel?.textAlignment = NSTextAlignment.Right
-        } else {
-            cell.textLabel?.textAlignment = NSTextAlignment.Left
-        }
-
-        return cell;
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder();
-        send();
-        return true;
-    }
-    
-
     func registerForKeyboardNotifications() {
         let notificationCenter = NSNotificationCenter.defaultCenter();
         notificationCenter.addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardDidHideNotification, object: nil)
-
+        
     }
     
     func keyboardWasShown(notification: NSNotification) {
         // Get the keyboard information
-        print("Keyboard did show")
+
         let info: NSDictionary = notification.userInfo!;
-        let keyboardSize = info.objectForKey(UIKeyboardFrameBeginUserInfoKey)!.CGRectValue.size;
-        
-        // Offset everything by keyboard height
-        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
-        tableView.contentInset = contentInsets;
-        tableView.scrollIndicatorInsets = contentInsets;
+        let keyboardSize = info.objectForKey(UIKeyboardFrameEndUserInfoKey)!.CGRectValue.size;
         
         
-        // If active text field is hidden by keyboard, scroll it so it's visible
-        var rect = self.view.frame;
+        let contentInsets = UIEdgeInsetsMake(0, 0, keyboardSize.height, 0);
+        scrollView.contentInset = contentInsets;
+        scrollView.scrollIndicatorInsets = contentInsets;
+        
+        
+        var rect = self.view.bounds;
         rect.size.height -= keyboardSize.height;
-        if (!CGRectContainsPoint(rect, messageTextField.frame.origin)) {
+        if (!CGRectContainsPoint(rect, self.messageTextField.frame.origin)) {
             self.scrollView.scrollRectToVisible(messageTextField.frame, animated: true);
-            scrollToLastMessage();
-//            messageTextField.frame = CGRectMake(messageTextField.frame.origin.x, messageTextField.frame.origin.y - keyboardSize.height, messageTextField.frame.width, messageTextField.frame.height)
-            
             
         }
+  
+        
     }
+    
 
     
     func keyboardWillBeHidden(notification: NSNotification) {
-        print("Keyboard will hide")
-        let contentInsets = UIEdgeInsetsZero;
-        tableView.contentInset = contentInsets;
-        tableView.scrollIndicatorInsets = contentInsets;
+        
+        UIView.animateWithDuration(0.04, animations: {
+            let contentInsets = UIEdgeInsetsZero;
+            self.scrollView.contentInset = contentInsets;
+            self.scrollView.scrollIndicatorInsets = contentInsets;
+        })
     }
     
-    
-    /*
-    // MARK: - Navigation
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        send();
+        return true;
+    }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+
 
 }
