@@ -8,6 +8,28 @@
 
 import UIKit
 
+extension String {
+    // If the string is empty this will return a null character
+    mutating func pop() -> Character {
+        if !(self.isEmpty) {
+            let index = self.endIndex.predecessor();
+            let char = self.removeAtIndex(index);
+            return char;
+        }
+        let empty: Character = "\0";
+        return empty;
+    }
+    
+    func back() -> Character {
+        if !(self.isEmpty) {
+            let index = self.endIndex.predecessor();
+            return self[index];
+        }
+        let empty: Character = "\0";
+        return empty;
+    }
+}
+
 class CalculatorViewController: UIViewController {
 
     @IBOutlet var resultLabel: UILabel!
@@ -17,9 +39,12 @@ class CalculatorViewController: UIViewController {
     
     var operators: Set<Operator> = Set();
     
-    var displayString: String = "0"
-    var evaluationString: String = "0"
-    var lastCharacter: Character = "0"
+    var displayString: String = "0";
+    var evaluationString: String = "0";
+    var lastCharacter: Character = "0";
+    
+    var isResult: Bool = false;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,13 +68,6 @@ class CalculatorViewController: UIViewController {
         
 
         // Do any additional setup after loading the view.
-        let infix = "~3 - ~4";
-        
-        let postfix = infixToPostfix(infix);
-        print(infix);
-        print(postfix);
-        print(evaluatePostfix(postfix));
-        
 
     }
 
@@ -82,8 +100,7 @@ class CalculatorViewController: UIViewController {
                 // Find the last character of the postfix string and see if it's an operator
                 // If it isn't, add a space after it to differentiate between the numbers in the postfix string
                 if (!postfix.isEmpty) {
-                    let lastIndex = postfix.endIndex.advancedBy(-1);
-                    if (!operators.contains(Operator(op:postfix[lastIndex]))) {
+                    if (postfix.back() != " " && !operators.contains(Operator(op:postfix.back()))) {
                         postfix += " ";
                     }
                 }
@@ -169,7 +186,10 @@ class CalculatorViewController: UIViewController {
             }
         }
         // Need to make sure stack size is 1 otherwise input has too many values
-        assert(stack.count == 1)
+        if (stack.count != 1) {
+            if let originalNum = Double(postfix) { return originalNum }
+        }
+        // assert(stack.count == 1)
         return stack.top();
     }
     
@@ -202,36 +222,92 @@ class CalculatorViewController: UIViewController {
     
     func createEvaluationString(char: Character) {
         if (displayString == "0") {
+            if (operators.contains(Operator(op: char))) {
+                return;
+            }
             displayString = "";
             evaluationString = "";
         }
         
-        // Can't have two operators in a row
-        if (operators.contains(Operator(op: char)) &&
-        operators.contains(Operator(op: lastCharacter))) {
+        // Negation is a special case
+        if (char == "~") {
             
-            displayString = displayString.substringToIndex(displayString.endIndex.predecessor());
+            // If last character is an operator, negate the next number, else: negate the previous number
+            if (!operators.contains(Operator(op: lastCharacter))) {
+                var evaluationStack = Stack<Character>()
 
-            evaluationString = evaluationString.substringToIndex(evaluationString.endIndex.predecessor());
+                
+                // Keep popping from evaluation string until it is empty or you reach another operator
+                // MARK: Check for parenthesis
+                while (!evaluationString.isEmpty && (evaluationString.back() == "~" || !operators.contains(Operator(op:evaluationString.back())))) {
+                    evaluationStack.push(evaluationString.pop());
+                }
+
+                // Reconstruct the evaluation string with the negation
+                evaluationString.append("~" as Character)
+                if (evaluationStack.top() == "~") {
+                    evaluationString.pop();
+                    evaluationStack.pop();
+                }
+                while (!evaluationStack.empty()) {
+                    // If the top of the stack is a negation, you don't need to append another negation
+                    evaluationString.append(evaluationStack.top());
+                    evaluationStack.pop();
+                }
+            } else {
+                
+            }
+            
+            displayString = "";
+            for element in evaluationString.characters {
+                displayString.append(displayChar(element));
+                //print("Display String: \(displayString)");
+            }
+
+            resultLabel.text = displayString;
+            return;
         }
         
-        switch (char) {
-            case "*":
-                displayString.append("x" as Character);
-                break;
-            case "/":
-                displayString.append("÷" as Character);
-                break;
             
-            default:
-                displayString.append(char);
+        // Can't have two operators in a row
+        else if (operators.contains(Operator(op: char)) &&
+        operators.contains(Operator(op: lastCharacter))) {
+            print("Can't have two operators in a row");
+            displayString.pop();
+            evaluationString.pop();
         }
+        
+        displayString.append(displayChar(char));
         evaluationString.append(char);
         lastCharacter = char;
         resultLabel.text = displayString;
         
-        print(evaluationString);
         print(displayString);
+        print(evaluationString);
+        
+    }
+    
+    func displayChar(char: Character) -> Character {
+        var returnChar = char;
+        switch (char) {
+            case "*":
+                returnChar = "×" as Character;
+                break;
+            case "/":
+                returnChar = "÷" as Character;
+                break;
+            case "~", "-":
+                returnChar = "-" as Character;
+                break;
+            case "+":
+                returnChar = "+" as Character;
+                break;
+                        
+            default:
+                break;
+                // print("Do nothing")
+        }
+        return returnChar;
     }
     
     // MARK: ALL BUTTONS
@@ -276,7 +352,12 @@ class CalculatorViewController: UIViewController {
     @IBAction func equals(sender: UIButton) {
         let infix = evaluationString;
         let postfix = infixToPostfix(infix);
+        
+        
         let result = evaluatePostfix(postfix);
+        
+        // Set isResult flag so that if keys are pressed after a result is evaluated, they are not concatenated to the result
+        isResult = true;
         displayString = "\(result)";
         evaluationString = "\(result)";
         self.resultLabel.text = "\(result)";
@@ -284,6 +365,7 @@ class CalculatorViewController: UIViewController {
     
     // +/-
     @IBAction func negate(sender: UIButton) {
+        createEvaluationString("~")
         
     }
 
