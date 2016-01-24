@@ -10,12 +10,16 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
 
+    @IBOutlet var resultLabel: UILabel!
+    
     // Set of numbers for O(1) access
-    let numbers: Set<Character> = Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]);
+    let numbers: Set<Character> = Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]);
     
     var operators: Set<Operator> = Set();
-
     
+    var displayString: String = "0"
+    var evaluationString: String = "0"
+    var lastCharacter: Character = "0"
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,16 +29,21 @@ class CalculatorViewController: UIViewController {
         let multiply = Operator(op: "*", prec: 3, assoc: "Left");
         let divide = Operator(op: "/", prec: 3, assoc: "Left");
         let exponent = Operator(op: "^", prec: 4, assoc: "Right");
+        let negate = Operator(op: "~", prec: 5, assoc: "Right");
+        let modulo = Operator(op: "%", prec: 3, assoc: "Left")
+        
         
         operators.insert(add);
         operators.insert(subtract);
         operators.insert(multiply);
         operators.insert(divide);
         operators.insert(exponent);
+        operators.insert(negate);
+        operators.insert(modulo);
         
 
         // Do any additional setup after loading the view.
-        let infix = "5 + ((1 + 2) * 4) - 3";
+        let infix = "~3 - ~4";
         
         let postfix = infixToPostfix(infix);
         print(infix);
@@ -72,10 +81,13 @@ class CalculatorViewController: UIViewController {
                 
                 // Find the last character of the postfix string and see if it's an operator
                 // If it isn't, add a space after it to differentiate between the numbers in the postfix string
-                let lastIndex = postfix.endIndex.advancedBy(-1);
-                if (!operators.contains(Operator(op:postfix[lastIndex]))) {
-                    postfix += " ";
+                if (!postfix.isEmpty) {
+                    let lastIndex = postfix.endIndex.advancedBy(-1);
+                    if (!operators.contains(Operator(op:postfix[lastIndex]))) {
+                        postfix += " ";
+                    }
                 }
+                
                 operatorStack.push(currentOperator);
                 
             }
@@ -137,7 +149,12 @@ class CalculatorViewController: UIViewController {
                     }
                     
                     // Make sure atleast 2 operands are in the stack
-                    assert(stack.count >= 2);
+                    if (char == "~") {
+                        assert(stack.count >= 1);
+                        stack.push(1);
+                    } else {
+                        assert(stack.count >= 2);
+                    }
                     
                     let second = stack.top();
                     stack.pop();
@@ -174,10 +191,156 @@ class CalculatorViewController: UIViewController {
             case "^":
                 result = pow(first, second);
                 break;
+            case "~":
+                result = -first;
         default:
             print("We shouldn't be here");
         }
         return result;
     }
+    
+    
+    func createEvaluationString(char: Character) {
+        if (displayString == "0") {
+            displayString = "";
+            evaluationString = "";
+        }
+        
+        // Can't have two operators in a row
+        if (operators.contains(Operator(op: char)) &&
+        operators.contains(Operator(op: lastCharacter))) {
+            
+            displayString = displayString.substringToIndex(displayString.endIndex.predecessor());
+
+            evaluationString = evaluationString.substringToIndex(evaluationString.endIndex.predecessor());
+        }
+        
+        switch (char) {
+            case "*":
+                displayString.append("x" as Character);
+                break;
+            case "/":
+                displayString.append("÷" as Character);
+                break;
+            
+            default:
+                displayString.append(char);
+        }
+        evaluationString.append(char);
+        lastCharacter = char;
+        resultLabel.text = displayString;
+        
+        print(evaluationString);
+        print(displayString);
+    }
+    
+    // MARK: ALL BUTTONS
+    
+    // C
+    @IBAction func clear(sender: UIButton) {
+        evaluationString = "0";
+        displayString = "0";
+        resultLabel.text = displayString;
+    }
+    
+    // ( )
+    @IBAction func parenthesis(sender: UIButton) {
+    }
+    
+    // %
+    @IBAction func modulo(sender: UIButton) {
+        createEvaluationString("%");
+    }
+    
+    // ÷
+    @IBAction func division(sender: UIButton) {
+        createEvaluationString("/");
+    }
+    
+    // X
+    @IBAction func multiply(sender: UIButton) {
+        createEvaluationString("*");
+    }
+    
+    // -
+    @IBAction func subtract(sender: UIButton) {
+        createEvaluationString("-");
+    }
+    
+    // +
+    @IBAction func add(sender: UIButton) {
+        createEvaluationString("+");
+    }
+    
+    // =
+    @IBAction func equals(sender: UIButton) {
+        let infix = evaluationString;
+        let postfix = infixToPostfix(infix);
+        let result = evaluatePostfix(postfix);
+        displayString = "\(result)";
+        evaluationString = "\(result)";
+        self.resultLabel.text = "\(result)";
+    }
+    
+    // +/-
+    @IBAction func negate(sender: UIButton) {
+        
+    }
+
+    // .
+    @IBAction func decimal(sender: UIButton) {
+    }
+    
+    // 0
+    @IBAction func zero(sender: UIButton) {
+        createEvaluationString("0");
+    }
+    
+    // 1
+    @IBAction func one(sender: UIButton) {
+        createEvaluationString("1");
+    }
+    
+    // 2
+    @IBAction func two(sender: UIButton) {
+        createEvaluationString("2");
+    }
+    
+    // 3
+    @IBAction func three(sender: UIButton) {
+        createEvaluationString("3");
+    }
+    
+    // 4
+    @IBAction func four(sender: UIButton) {
+        createEvaluationString("4");
+    }
+    
+    // 5
+    @IBAction func five(sender: UIButton) {
+        createEvaluationString("5");
+    }
+    
+    // 6
+    @IBAction func six(sender: UIButton) {
+        createEvaluationString("6");
+    }
+    
+    // 7
+    @IBAction func seven(sender: UIButton) {
+        createEvaluationString("7");
+    }
+    
+    // 8
+    @IBAction func eight(sender: UIButton) {
+        createEvaluationString("8");
+    }
+    
+    // 9
+    @IBAction func nine(sender: UIButton) {
+        createEvaluationString("9");
+    }
+
+
 
 }
