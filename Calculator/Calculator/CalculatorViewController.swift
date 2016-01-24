@@ -34,11 +34,12 @@ class CalculatorViewController: UIViewController {
         
 
         // Do any additional setup after loading the view.
-        let infix = "(300 + 23) * (43 - 21) / (84 + 7)";
+        let infix = "5 + ((1 + 2) * 4) - 3";
         
         let postfix = infixToPostfix(infix);
         print(infix);
         print(postfix);
+        print(evaluatePostfix(postfix));
         
 
     }
@@ -52,7 +53,7 @@ class CalculatorViewController: UIViewController {
     func infixToPostfix(infix: String) -> String {
         var postfix = "";
         var operatorStack = Stack<Operator>();
-        
+
         for char in infix.characters {
             if numbers.contains(char) {
                 postfix.append(char);
@@ -69,6 +70,12 @@ class CalculatorViewController: UIViewController {
                     operatorStack.pop();
                 }
                 
+                // Find the last character of the postfix string and see if it's an operator
+                // If it isn't, add a space after it to differentiate between the numbers in the postfix string
+                let lastIndex = postfix.endIndex.advancedBy(-1);
+                if (!operators.contains(Operator(op:postfix[lastIndex]))) {
+                    postfix += " ";
+                }
                 operatorStack.push(currentOperator);
                 
             }
@@ -78,13 +85,13 @@ class CalculatorViewController: UIViewController {
             }
             
             else if (char == ")") {
-                while (operatorStack.top().charOperator != "(" && !operatorStack.empty()) {
+                while (operatorStack.top().charOperator != "(") {
                     postfix.append(operatorStack.top().charOperator);
                     operatorStack.pop();
+                    
+                    // Mismatched parenthesis error
+                    assert(!operatorStack.empty());
                 }
-                
-                // Mismatched parenthesis error
-                assert(!operatorStack.empty());
                 
                 // Pop the "(" from the stack
                 operatorStack.pop();
@@ -109,9 +116,68 @@ class CalculatorViewController: UIViewController {
     }
 
     
-    func evaluatePostfix(postfix: String) {
+    func evaluatePostfix(postfix: String) -> Double {
+        var stack = Stack<Double>()
 
-        
+        var currentNum = "";
+        for char in postfix.characters {
+            if (char == " ") {
+                // Make sure we can convert the current number to an Int
+                assert(Double(currentNum) != nil);
+                
+                stack.push(Double(currentNum)!);
+                currentNum = "";
+            } else {
+                if numbers.contains(char) {
+                    currentNum.append(char);
+                } else {
+                    if let num = Double(currentNum) {
+                        stack.push(num);
+                        currentNum = ""
+                    }
+                    
+                    // Make sure atleast 2 operands are in the stack
+                    assert(stack.count >= 2);
+                    
+                    let second = stack.top();
+                    stack.pop();
+                    
+                    let first = stack.top();
+                    stack.pop();
+                    
+                    stack.push(findResult(char, first: first, second: second));
+                    
+                }
+                
+            }
+        }
+        // Need to make sure stack size is 1 otherwise input has too many values
+        assert(stack.count == 1)
+        return stack.top();
+    }
+    
+    func findResult( op: Character, first: Double, second: Double) -> Double {
+        var result: Double = 0.0;
+        switch(op) {
+            case "+":
+                result = first + second;
+                break;
+            case "-":
+                result = first - second;
+                break;
+            case "*":
+                result = first * second;
+                break;
+            case "/":
+                result = first / second;
+                break;
+            case "^":
+                result = pow(first, second);
+                break;
+        default:
+            print("We shouldn't be here");
+        }
+        return result;
     }
 
 }

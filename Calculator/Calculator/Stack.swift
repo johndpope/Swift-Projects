@@ -22,6 +22,7 @@ struct Stack<Element> {
 
     func top() -> Element {
         return items[items.count - 1];
+
     }
     
     func empty() -> Bool {
