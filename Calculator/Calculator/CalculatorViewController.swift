@@ -55,7 +55,7 @@ class CalculatorViewController: UIViewController {
         let divide = Operator(op: "/", prec: 3, assoc: "Left");
         let exponent = Operator(op: "^", prec: 4, assoc: "Right");
         let negate = Operator(op: "~", prec: 5, assoc: "Right");
-        let modulo = Operator(op: "%", prec: 3, assoc: "Left")
+        let modulo = Operator(op: "%", prec: 3, assoc: "Left");
         
         
         operators.insert(add);
@@ -68,7 +68,6 @@ class CalculatorViewController: UIViewController {
         
 
         // Do any additional setup after loading the view.
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -141,6 +140,7 @@ class CalculatorViewController: UIViewController {
             operatorStack.pop();
         }
         
+        print(postfix);
         return postfix;
     }
 
@@ -210,6 +210,9 @@ class CalculatorViewController: UIViewController {
                 break;
             case "^":
                 result = pow(first, second);
+                break;
+            case "%":
+                result = first % second;
                 break;
             case "~":
                 result = -first;
@@ -330,7 +333,7 @@ class CalculatorViewController: UIViewController {
             case "+":
                 returnChar = "+" as Character;
                 break;
-                        
+
             default:
                 break;
                 // print("Do nothing")
