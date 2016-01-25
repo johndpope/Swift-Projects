@@ -42,7 +42,7 @@ class CalculatorViewController: UIViewController {
     var displayString: String = "0";
     var evaluationString: String = "0";
     var lastCharacter: Character = "0";
-    
+    var addZero: Bool = true;
     var isResult: Bool = false;
     
     override func viewDidLoad() {
@@ -221,8 +221,11 @@ class CalculatorViewController: UIViewController {
     
     
     func createEvaluationString(char: Character) {
+        // Check if the display string is 0
+        
+        let charOperator = Operator(op: char);
         if (displayString == "0") {
-            if (operators.contains(Operator(op: char))) {
+            if (operators.contains(charOperator)) {
                 return;
             }
             displayString = "";
@@ -231,52 +234,43 @@ class CalculatorViewController: UIViewController {
         
         // Negation is a special case
         if (char == "~") {
-            
-            // If last character is an operator, negate the next number, else: negate the previous number
-            if (!operators.contains(Operator(op: lastCharacter))) {
-                var evaluationStack = Stack<Character>()
-
-                
-                // Keep popping from evaluation string until it is empty or you reach another operator
-                // MARK: Check for parenthesis
-                while (!evaluationString.isEmpty && (evaluationString.back() == "~" || !operators.contains(Operator(op:evaluationString.back())))) {
-                    evaluationStack.push(evaluationString.pop());
-                }
-
-                // Reconstruct the evaluation string with the negation
-                evaluationString.append("~" as Character)
-                if (evaluationStack.top() == "~") {
-                    evaluationString.pop();
-                    evaluationStack.pop();
-                }
-                while (!evaluationStack.empty()) {
-                    // If the top of the stack is a negation, you don't need to append another negation
-                    evaluationString.append(evaluationStack.top());
-                    evaluationStack.pop();
-                }
-            } else {
-                
-            }
-            
-            displayString = "";
-            for element in evaluationString.characters {
-                displayString.append(displayChar(element));
-                //print("Display String: \(displayString)");
-            }
-
-            resultLabel.text = displayString;
+            handleNegation();
             return;
         }
         
+        // If we just evaluated an expression and we enter another number, we must clear the current
+        // display to prevent concatenation
+        else if (isResult) {
+            isResult = false;
+            if (numbers.contains(char)) {
+                displayString = "";
+                evaluationString = "";
+            }
+        }
             
         // Can't have two operators in a row
-        else if (operators.contains(Operator(op: char)) &&
+        else if (operators.contains(charOperator) &&
         operators.contains(Operator(op: lastCharacter))) {
             print("Can't have two operators in a row");
             displayString.pop();
             evaluationString.pop();
         }
         
+        // Last character was an operator & this character is a 0. Can't add anymore 0s after this
+        else if (operators.contains(Operator(op: lastCharacter)) && char == "0" && addZero) {
+            print("Statement 1");
+            addZero = false;
+        }
+        
+        // Last character was a 0 && addZero is false and this char is not equal to 0
+        else if (lastCharacter == "0" && !addZero) {
+            if (char == "0") {
+                return;
+            }
+            addZero = true;
+        }
+        
+        // Append all other operators to the end of the evaluation + display strings
         displayString.append(displayChar(char));
         evaluationString.append(char);
         lastCharacter = char;
@@ -285,6 +279,40 @@ class CalculatorViewController: UIViewController {
         print(displayString);
         print(evaluationString);
         
+    }
+    
+    func handleNegation() {
+        // If last character is an operator, negate the next number, else: negate the previous number
+        if (!operators.contains(Operator(op: lastCharacter))) {
+            var evaluationStack = Stack<Character>()
+            
+            
+            // Keep popping from evaluation string until it is empty or you reach another operator
+            // MARK: Check for parenthesis
+            while (!evaluationString.isEmpty && (evaluationString.back() == "~" || !operators.contains(Operator(op:evaluationString.back())))) {
+                evaluationStack.push(evaluationString.pop());
+            }
+            
+            // Reconstruct the evaluation string with the negation
+            evaluationString.append("~" as Character)
+            if (evaluationStack.top() == "~") {
+                evaluationString.pop();
+                evaluationStack.pop();
+            }
+            while (!evaluationStack.empty()) {
+                // If the top of the stack is a negation, you don't need to append another negation
+                evaluationString.append(evaluationStack.top());
+                evaluationStack.pop();
+            }
+        }
+        
+        displayString = "";
+        for element in evaluationString.characters {
+            displayString.append(displayChar(element));
+            //print("Display String: \(displayString)");
+        }
+        
+        resultLabel.text = displayString;
     }
     
     func displayChar(char: Character) -> Character {
@@ -350,6 +378,7 @@ class CalculatorViewController: UIViewController {
     
     // =
     @IBAction func equals(sender: UIButton) {
+
         let infix = evaluationString;
         let postfix = infixToPostfix(infix);
         
@@ -361,6 +390,7 @@ class CalculatorViewController: UIViewController {
         displayString = "\(result)";
         evaluationString = "\(result)";
         self.resultLabel.text = "\(result)";
+
     }
     
     // +/-
@@ -376,6 +406,7 @@ class CalculatorViewController: UIViewController {
     // 0
     @IBAction func zero(sender: UIButton) {
         createEvaluationString("0");
+
     }
     
     // 1
