@@ -42,6 +42,8 @@ class CalculatorViewController: UIViewController {
     var displayString: String = "0";
     var evaluationString: String = "0";
     var lastCharacter: Character = "0";
+    
+    var decimalIsSet: Bool = false;
     var addZero: Bool = true;
     var isResult: Bool = false;
     
@@ -68,6 +70,10 @@ class CalculatorViewController: UIViewController {
         
 
         // Do any additional setup after loading the view.
+        let infix = ".2*3";
+        let postfix = infixToPostfix(infix);
+        let ans = evaluatePostfix(postfix);
+        print(ans);
     }
 
     override func didReceiveMemoryWarning() {
@@ -130,7 +136,6 @@ class CalculatorViewController: UIViewController {
         
         // No more characters to read
         // Operator stack is not empty
-        print(operatorStack);
         while (!operatorStack.empty()) {
             
             // Mismatched parenthesis error
@@ -140,7 +145,6 @@ class CalculatorViewController: UIViewController {
             operatorStack.pop();
         }
         
-        print(postfix);
         return postfix;
     }
 
@@ -231,8 +235,12 @@ class CalculatorViewController: UIViewController {
             if (operators.contains(charOperator)) {
                 return;
             }
-            displayString = "";
-            evaluationString = "";
+            
+            // If the character is a decimal, we want to append it to the zero
+            if (!(char == ".")) {
+                displayString = "";
+                evaluationString = "";
+            }
         }
         
         // Negation is a special case
@@ -251,14 +259,23 @@ class CalculatorViewController: UIViewController {
             }
         }
             
-        // Can't have two operators in a row
-        else if (operators.contains(charOperator) &&
-        operators.contains(Operator(op: lastCharacter))) {
-            print("Can't have two operators in a row");
-            displayString.pop();
-            evaluationString.pop();
+        // Check if the current char is an operator
+        else if (operators.contains(charOperator)) {
+            // Reset the decimalIsSet flag everytime an operator is pressed
+            decimalIsSet = false;
+            
+            
+            // Can't have two operators in a row
+            if operators.contains(Operator(op: lastCharacter)) {
+                print("Can't have two operators in a row");
+                displayString.pop();
+                evaluationString.pop();
+            }
+            
         }
         
+            
+        // MARK: Adding 0s edge cases
         // Last character was an operator & this character is a 0. Can't add anymore 0s after this
         else if (operators.contains(Operator(op: lastCharacter)) && char == "0" && addZero) {
             print("Statement 1");
@@ -271,6 +288,17 @@ class CalculatorViewController: UIViewController {
                 return;
             }
             addZero = true;
+        }
+
+            
+        // MARK: Check for decimals edge cases
+        // Check if there is already a decimal in the number. If there is return, if not continue to append the decimal
+        if (decimalIsSet && char == ".") {
+            return;
+        }
+        // If there is no decimal then set the decimalIsSet flag to true
+        else if (!decimalIsSet && char == ".") {
+            decimalIsSet = true;
         }
         
         // Append all other operators to the end of the evaluation + display strings
@@ -312,7 +340,6 @@ class CalculatorViewController: UIViewController {
         displayString = "";
         for element in evaluationString.characters {
             displayString.append(displayChar(element));
-            //print("Display String: \(displayString)");
         }
         
         resultLabel.text = displayString;
@@ -327,16 +354,18 @@ class CalculatorViewController: UIViewController {
             case "/":
                 returnChar = "÷" as Character;
                 break;
-            case "~", "-":
+            case "~":
                 returnChar = "-" as Character;
                 break;
-            case "+":
-                returnChar = "+" as Character;
-                break;
-
+//            case "~", "-":
+//                returnChar = "-" as Character;
+//                break;
+//            case "+":
+//                returnChar = "+" as Character;
+//                break;
+            
             default:
                 break;
-                // print("Do nothing")
         }
         return returnChar;
     }
@@ -345,6 +374,7 @@ class CalculatorViewController: UIViewController {
     
     // C
     @IBAction func clear(sender: UIButton) {
+        decimalIsSet = false;
         evaluationString = "0";
         displayString = "0";
         resultLabel.text = displayString;
@@ -388,10 +418,21 @@ class CalculatorViewController: UIViewController {
         
         let result = evaluatePostfix(postfix);
         
+        // Set the decimalIsSet flag to false because the result should not append a new decimal.
+        decimalIsSet = false;
+        
         // Set isResult flag so that if keys are pressed after a result is evaluated, they are not concatenated to the result
         isResult = true;
         displayString = "\(result)";
-        evaluationString = "\(result)";
+        
+        // Import to check if the result is negative, we need to change the negative sign to a tilda so that
+        // we don't try to pop two elements off an empty stack
+        if result < 0 {
+            evaluationString = "~\(-result)";
+        } else {
+            evaluationString = "\(result)";
+        }
+        
         self.resultLabel.text = "\(result)";
 
     }
@@ -404,6 +445,7 @@ class CalculatorViewController: UIViewController {
 
     // .
     @IBAction func decimal(sender: UIButton) {
+        createEvaluationString(".");
     }
     
     // 0
