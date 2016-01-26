@@ -33,6 +33,7 @@ extension String {
 class CalculatorViewController: UIViewController {
 
     @IBOutlet var resultLabel: UILabel!
+    @IBOutlet var parenthesisOverlay: UIView!
     
     // Set of numbers for O(1) access
     let numbers: Set<Character> = Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]);
@@ -42,11 +43,12 @@ class CalculatorViewController: UIViewController {
     var displayString: String = "0";
     var evaluationString: String = "0";
     var lastCharacter: Character = "0";
+    var numOpenParens: Int = 0;
     
     var decimalIsSet: Bool = false;
     var addZero: Bool = true;
     var isResult: Bool = false;
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,10 +72,7 @@ class CalculatorViewController: UIViewController {
         
 
         // Do any additional setup after loading the view.
-        let infix = ".2*3";
-        let postfix = infixToPostfix(infix);
-        let ans = evaluatePostfix(postfix);
-        print(ans);
+        parenthesisOverlay.backgroundColor = UIColor.greenColor();
     }
 
     override func didReceiveMemoryWarning() {
@@ -139,7 +138,6 @@ class CalculatorViewController: UIViewController {
         while (!operatorStack.empty()) {
             
             // Mismatched parenthesis error
-            
             assert(operatorStack.top().charOperator != "(" && operatorStack.top().charOperator != ")")
             postfix.append(operatorStack.top().charOperator);
             operatorStack.pop();
@@ -229,7 +227,6 @@ class CalculatorViewController: UIViewController {
     
     func createEvaluationString(char: Character) {
         // Check if the display string is 0
-        
         let charOperator = Operator(op: char);
         if (displayString == "0") {
             if (operators.contains(charOperator)) {
@@ -309,6 +306,7 @@ class CalculatorViewController: UIViewController {
         
         print(displayString);
         print(evaluationString);
+        print(numOpenParens);
         
     }
     
@@ -374,6 +372,11 @@ class CalculatorViewController: UIViewController {
     
     // C
     @IBAction func clear(sender: UIButton) {
+        reset()
+    }
+    
+    func reset() {
+        numOpenParens = 0;
         decimalIsSet = false;
         evaluationString = "0";
         displayString = "0";
@@ -382,6 +385,25 @@ class CalculatorViewController: UIViewController {
     
     // ( )
     @IBAction func parenthesis(sender: UIButton) {
+        // If the last character is a number or closed parenthesis and we still open parenthesis
+        // we must close them
+        if ((numbers.contains(lastCharacter) || lastCharacter == ")") && numOpenParens != 0) {
+            --numOpenParens;
+            createEvaluationString(")");
+        } else {
+            // We have no parens open
+            ++numOpenParens
+            if (numbers.contains(lastCharacter)) {
+                createEvaluationString("*");
+            }
+            createEvaluationString("(");
+        }
+        
+        if (numOpenParens != 0) {
+            parenthesisOverlay.backgroundColor = UIColor.redColor();
+        } else {
+            parenthesisOverlay.backgroundColor = UIColor.greenColor();
+        }
     }
     
     // %
