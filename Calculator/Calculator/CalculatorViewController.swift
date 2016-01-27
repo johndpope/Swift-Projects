@@ -381,6 +381,7 @@ class CalculatorViewController: UIViewController {
         evaluationString = "0";
         displayString = "0";
         resultLabel.text = displayString;
+        parenthesisOverlay.backgroundColor = UIColor.greenColor();
     }
     
     // ( )
