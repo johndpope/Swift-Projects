@@ -30,10 +30,11 @@ extension String {
     }
 }
 
-class CalculatorViewController: UIViewController {
+class CalculatorViewController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet var resultLabel: UILabel!
     @IBOutlet var parenthesisOverlay: UIView!
+    @IBOutlet var scrollView: UIScrollView!
     
     // Set of numbers for O(1) access
     let numbers: Set<Character> = Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]);
@@ -73,12 +74,16 @@ class CalculatorViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         parenthesisOverlay.backgroundColor = UIColor.greenColor();
+
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
     // Method to convert from infix to postfix using the Shunting-yard algorithm
     func infixToPostfix(infix: String) -> String {
@@ -224,6 +229,7 @@ class CalculatorViewController: UIViewController {
         return result;
     }
     
+
     
     func createEvaluationString(char: Character) {
         // Check if the display string is 0
@@ -522,6 +528,6 @@ class CalculatorViewController: UIViewController {
         createEvaluationString("9");
     }
 
-
+    
 
 }
