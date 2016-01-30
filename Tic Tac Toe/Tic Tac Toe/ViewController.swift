@@ -248,13 +248,13 @@ class ViewController: UIViewController {
     
         winLabel.hidden = true;
         playAgainButton.hidden = true;
-        var num = arc4random_uniform(2);
+        let num = arc4random_uniform(2);
 
         if (num == 1) {
             humanTurn = true;
-            println("My turn");
+            print("My turn");
         } else {
-            println("Machine's turn");
+            print("Machine's turn");
             humanTurn = false;
             machinePlay();
         }

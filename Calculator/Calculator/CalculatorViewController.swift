@@ -35,6 +35,7 @@ class CalculatorViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet var resultLabel: UILabel!
     @IBOutlet var parenthesisOverlay: UIView!
     @IBOutlet var scrollView: UIScrollView!
+    var errorDisplay: UILabel!
     
     // Set of numbers for O(1) access
     let numbers: Set<Character> = Set(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."]);
@@ -74,10 +75,76 @@ class CalculatorViewController: UIViewController, UIScrollViewDelegate {
 
         // Do any additional setup after loading the view.
         parenthesisOverlay.backgroundColor = UIColor.greenColor();
-
+        createErrorDisplay();
+    }
+  
+    func createErrorDisplay() {
+        let rect = CGRectMake(0, -20, self.view.frame.width, 20);
+        let label = UILabel(frame: rect)
+        label.backgroundColor = UIColor(red: 0.235, green: 0.235, blue: 0.235, alpha: 1);
+        label.textColor = UIColor.whiteColor();
+        label.text = "ERROR";
+        label.textAlignment = NSTextAlignment.Center;
+        self.errorDisplay = label;
+        self.view.addSubview(label);
+        
     }
     
     
+
+    func displayError() {
+        // We need the displayError to slide down from the top
+        // After sliding down it should fade out
+        // If the displayError is already animating, it should restart the animation
+        
+        self.errorDisplay.alpha = 1.0;
+        if (self.errorDisplay.frame.origin.y == -20) {
+            // Animate
+            print("Animate")
+            UIView.animateWithDuration(1,
+                animations: {
+                    self.errorDisplay.frame.origin.y += 40;
+                },
+                
+                completion: {
+                (isComplete) in
+                
+                if (isComplete) {
+                    // Animation completed
+                    self.hideError();
+                    
+                } else {
+                    // Animation did not complete
+
+                }
+                
+            })
+        } else {
+            // Restart animation
+            print("Restart")
+            hideError();
+        }
+        
+    }
+    
+    func hideError() {
+        
+        if (self.errorDisplay.frame.origin.y == 20) {
+            UIView.animateWithDuration(3,
+                animations: {
+                    self.errorDisplay.alpha = 0.0
+                },
+                
+                completion: {
+                (isComplete) in
+                    if (isComplete) {
+                        self.errorDisplay.frame.origin.y = -20;
+                    }
+                
+            })
+        }
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -128,7 +195,11 @@ class CalculatorViewController: UIViewController, UIScrollViewDelegate {
                     operatorStack.pop();
                     
                     // Mismatched parenthesis error
-                    assert(!operatorStack.empty());
+                    if (operatorStack.empty()) {
+                        self.displayError();
+                        return "0";
+                    }
+                    //assert(!operatorStack.empty());
                 }
                 
                 // Pop the "(" from the stack
@@ -143,7 +214,11 @@ class CalculatorViewController: UIViewController, UIScrollViewDelegate {
         while (!operatorStack.empty()) {
             
             // Mismatched parenthesis error
-            assert(operatorStack.top().charOperator != "(" && operatorStack.top().charOperator != ")")
+            if (operatorStack.top().charOperator == "(" || operatorStack.top().charOperator == ")") {
+                self.displayError();
+                return "0";
+            }
+            //assert(operatorStack.top().charOperator != "(" && operatorStack.top().charOperator != ")")
             postfix.append(operatorStack.top().charOperator);
             operatorStack.pop();
         }
@@ -159,7 +234,11 @@ class CalculatorViewController: UIViewController, UIScrollViewDelegate {
         for char in postfix.characters {
             if (char == " ") {
                 // Make sure we can convert the current number to an Int
-                assert(Double(currentNum) != nil);
+                if (Double(currentNum) == nil) {
+                    self.displayError();
+                    return 0.0;
+                }
+                //assert(Double(currentNum) != nil);
                 
                 stack.push(Double(currentNum)!);
                 currentNum = "";
@@ -174,10 +253,18 @@ class CalculatorViewController: UIViewController, UIScrollViewDelegate {
                     
                     // Make sure atleast 2 operands are in the stack
                     if (char == "~") {
-                        assert(stack.count >= 1);
+                        if (stack.count < 1) {
+                            self.displayError();
+                            return 0.0;
+                        }
+                        //assert(stack.count >= 1);
                         stack.push(1);
                     } else {
-                        assert(stack.count >= 2);
+                        if (stack.count < 2) {
+                            self.displayError();
+                            return 0;
+                        }
+                        //assert(stack.count >= 2);
                     }
                     
                     let second = stack.top();
@@ -256,7 +343,14 @@ class CalculatorViewController: UIViewController, UIScrollViewDelegate {
         // display to prevent concatenation
         else if (isResult) {
             isResult = false;
-            if (numbers.contains(char)) {
+            // Handle the case where the user just presses any number and presses the equals button
+            // We don't want the display string to only show a decimal point because that can't be
+            // evaluated by our program
+            if (char == ".") {
+                displayString = "0";
+                evaluationString = "0";
+            }
+            else if (numbers.contains(char)) {
                 displayString = "";
                 evaluationString = "";
             }
@@ -463,6 +557,7 @@ class CalculatorViewController: UIViewController, UIScrollViewDelegate {
         }
         
         self.resultLabel.text = "\(result)";
+        self.parenthesisOverlay.backgroundColor = UIColor.greenColor();t
 
     }
     
