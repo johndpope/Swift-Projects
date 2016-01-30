@@ -89,14 +89,16 @@ class CalculatorViewController: UIViewController, UIScrollViewDelegate {
         self.view.addSubview(label);
         
     }
-    
-    
 
     func displayError() {
+        
+        // Reset the screen
+        self.reset();
+        
+        
         // We need the displayError to slide down from the top
         // After sliding down it should fade out
         // If the displayError is already animating, it should restart the animation
-        
         self.errorDisplay.alpha = 1.0;
         if (self.errorDisplay.frame.origin.y == -20) {
             // Animate
@@ -476,6 +478,7 @@ class CalculatorViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func reset() {
+        lastCharacter = "0";
         numOpenParens = 0;
         decimalIsSet = false;
         evaluationString = "0";
@@ -486,7 +489,7 @@ class CalculatorViewController: UIViewController, UIScrollViewDelegate {
     
     // ( )
     @IBAction func parenthesis(sender: UIButton) {
-        // If the last character is a number or closed parenthesis and we still open parenthesis
+        // If the last character is a number or closed parenthesis and we still have open parentheses,
         // we must close them
         if ((numbers.contains(lastCharacter) || lastCharacter == ")") && numOpenParens != 0) {
             --numOpenParens;
