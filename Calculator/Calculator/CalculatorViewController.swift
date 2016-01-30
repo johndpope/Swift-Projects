@@ -557,7 +557,7 @@ class CalculatorViewController: UIViewController, UIScrollViewDelegate {
         }
         
         self.resultLabel.text = "\(result)";
-        self.parenthesisOverlay.backgroundColor = UIColor.greenColor();t
+        self.parenthesisOverlay.backgroundColor = UIColor.greenColor();
 
     }
     
