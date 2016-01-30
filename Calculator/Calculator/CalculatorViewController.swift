@@ -30,6 +30,28 @@ extension String {
     }
 }
 
+@IBDesignable
+class CalcButton: UIButton {
+    @IBInspectable var borderWidth: CGFloat = 0 {
+        didSet {
+            layer.borderWidth = borderWidth;
+        }
+    }
+    
+    @IBInspectable var borderColor: UIColor? {
+        didSet {
+            layer.borderColor = borderColor?.CGColor;
+        }
+    }
+    
+    @IBInspectable override var showsTouchWhenHighlighted: Bool {
+        didSet {
+            super.showsTouchWhenHighlighted = showsTouchWhenHighlighted;
+        }
+    }
+
+}
+
 class CalculatorViewController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet var resultLabel: UILabel!
