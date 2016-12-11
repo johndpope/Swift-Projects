@@ -20,6 +20,7 @@ extension String {
         return empty;
     }
     
+    // Get the last character of the string, returns null string if empty
     func back() -> Character {
         if !(self.isEmpty) {
             let index = self.endIndex.predecessor();

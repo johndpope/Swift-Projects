@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nsQ-2e-9wS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nsQ-2e-9wS">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -78,6 +78,9 @@
                                             <exclude reference="PYx-KC-Gaf"/>
                                         </mask>
                                         <mask key="constraints">
+                                            <exclude reference="Fd6-Ld-aaY"/>
+                                            <exclude reference="V4a-8g-Q4C"/>
+                                            <exclude reference="W5t-ce-Na4"/>
                                             <exclude reference="MXz-5l-JhH"/>
                                             <exclude reference="NqP-vL-y3t"/>
                                             <exclude reference="0FZ-rq-lLp"/>
@@ -88,9 +91,6 @@
                                             <exclude reference="lV1-db-Dbq"/>
                                             <exclude reference="pZB-t7-IhP"/>
                                             <exclude reference="tde-r5-66q"/>
-                                            <exclude reference="Fd6-Ld-aaY"/>
-                                            <exclude reference="V4a-8g-Q4C"/>
-                                            <exclude reference="W5t-ce-Na4"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -98,6 +98,9 @@
                                             <include reference="PYx-KC-Gaf"/>
                                         </mask>
                                         <mask key="constraints">
+                                            <include reference="Fd6-Ld-aaY"/>
+                                            <exclude reference="V4a-8g-Q4C"/>
+                                            <include reference="W5t-ce-Na4"/>
                                             <include reference="MXz-5l-JhH"/>
                                             <include reference="NqP-vL-y3t"/>
                                             <exclude reference="0FZ-rq-lLp"/>
@@ -108,9 +111,6 @@
                                             <include reference="lV1-db-Dbq"/>
                                             <exclude reference="pZB-t7-IhP"/>
                                             <include reference="tde-r5-66q"/>
-                                            <include reference="Fd6-Ld-aaY"/>
-                                            <exclude reference="V4a-8g-Q4C"/>
-                                            <include reference="W5t-ce-Na4"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>

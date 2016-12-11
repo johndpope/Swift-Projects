@@ -13,13 +13,11 @@ class ViewImageViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet var scrollView: UIScrollView!
     var comicID : Int!
     var image : UIImage!
-    //var imageView : UIImageView?
     @IBOutlet var imageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        
+
         // Set up the scroll view delegate, min zoom, and max zoom
         scrollView.delegate = self;
         scrollView.minimumZoomScale = 0.5;
